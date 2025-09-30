@@ -11,8 +11,24 @@
       <p>juan@ejemplo.com</p>
     </div>
   </div>
+  </ion-content>
+  
+  <ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="email" type="email"></ion-input>
+  </ion-item>
 
-  <!-- Estadisticas -->
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input [(ngModel)]="password" type="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" (click)="login()">Login</ion-button>
+  <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button>
+</ion-content>
+<!-- 
+  
   <section class="estadisticas">
     <h3>Mis Estadísticas</h3>
     <div class="estadisticas-div">
@@ -31,7 +47,7 @@
     </div>
   </section>
 
-  <!-- Menú de opciones -->
+  
   <div class="menu">
     <ion-list lines="none">
       <ion-item button class="menu-opcion">
@@ -63,11 +79,11 @@
     </ion-list>
   </div>
 
-  <!-- Botón de cerrar sesión -->
+  
   <div class="logout">
     <ion-button expand="block" color="medium" fill="outline">
       <ion-icon name="log-out-outline"></ion-icon>
       Cerrar Sesión
     </ion-button>
   </div>
-</ion-content>
+</ion-content> -->
