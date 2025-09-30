@@ -1,17 +1,73 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>
-      Tab 3
-    </ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 3</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Información del usuario -->
+  <div class="perfil">
+    <div class="avatar">
+      <ion-avatar>
+        <img src="https://via.placeholder.com/100/3880ff/ffffff?text=US" alt="Usuario">
+      </ion-avatar>
+    </div>
+    <div class="info-usuario">
+      <h2>Juan Pérez</h2>
+      <p>juan@ejemplo.com</p>
+    </div>
+  </div>
 
-  <app-explore-container name="Tab 3 page"></app-explore-container>
+  <!-- Estadisticas -->
+  <section class="estadisticas">
+    <h3>Mis Estadísticas</h3>
+    <div class="estadisticas-div">
+      <div class="estadisticas-item">
+        <h4>24</h4>
+        <p>Juegos Vistos</p>
+      </div>
+      <div class="estadisticas-item">
+        <h4>8</h4>
+        <p>Favoritos</p>
+      </div>
+      <div class="estadisticas-item">
+        <h4>15</h4>
+        <p>Busquedas</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menú de opciones -->
+  <div class="menu">
+    <ion-list lines="none">
+      <ion-item button class="menu-opcion">
+        <ion-icon name="heart-outline" slot="start" color="danger"></ion-icon>
+        <ion-label>Mis Favoritos</ion-label>
+        <ion-badge color="danger" slot="end">8</ion-badge>
+      </ion-item>
+
+      <ion-item button class="menu-opcion">
+        <ion-icon name="time-outline" slot="start" color="warning"></ion-icon>
+        <ion-label>Recientemente Vistos</ion-label>
+      </ion-item>
+
+      <ion-item button class="menu-opcion">
+        <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
+        <ion-label>Notificaciones</ion-label>
+        <ion-badge color="primary" slot="end">3</ion-badge>
+      </ion-item>
+
+      <ion-item button class="menu-opcion">
+        <ion-icon name="settings-outline" slot="start" color="medium"></ion-icon>
+        <ion-label>Configuración</ion-label>
+      </ion-item>
+
+      <ion-item button class="menu-opcion">
+        <ion-icon name="help-circle-outline" slot="start" color="tertiary"></ion-icon>
+        <ion-label>Ayuda y Soporte</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
+
+  <!-- Botón de cerrar sesión -->
+  <div class="logout">
+    <ion-button expand="block" color="medium" fill="outline">
+      <ion-icon name="log-out-outline"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+  </div>
 </ion-content>

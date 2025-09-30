@@ -1,17 +1,81 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Tab 1
-    </ion-title>
-  </ion-toolbar>
+    <div class="header">
+      <ion-title>GamePage</ion-title>
+      <ion-avatar>
+        <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+      </ion-avatar>
+    </div>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Tab 1</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <!-- Banner de bienvenida -->
+  <div class="bienvenida">
+    <h1>¡Bienvenido a GamePage!</h1>
+    <p>Descubre Post's de Videojuegos</p>
+  </div>
 
-  <app-explore-container name="Tab 1 page"></app-explore-container>
+  <div class="juegos-grid">
+    <ion-card class="juegos-card">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>Zelda: Breath of the Wild</ion-card-title>
+        <ion-card-subtitle>⭐ 4.8/5</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="juegos-card">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>God of War</ion-card-title>
+        <ion-card-subtitle>⭐ 4.7/5</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="juegos-card">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>Red Dead Redemption 2</ion-card-title>
+        <ion-card-subtitle>⭐ 4.9/5</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card class="juegos-card">
+      <img alt="Silhouette of mountains" src="https://ionicframework.com/docs/img/demos/card-media.png" />
+      <ion-card-header>
+        <ion-card-title>The Witcher 3</ion-card-title>
+        <ion-card-subtitle>⭐ 4.8/5</ion-card-subtitle>
+      </ion-card-header>
+
+      <ion-card-content>
+        Here's a small text description for the card content. Nothing more, nothing less.
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Sección de categorías -->
+  <div class="categorias">
+    <h2>Categorías Populares</h2>
+    <div class="lista-categorias">
+      <ion-chip color="primary">Acción</ion-chip>
+      <ion-chip color="secondary">Aventura</ion-chip>
+      <ion-chip color="tertiary">RPG</ion-chip>
+      <ion-chip color="success">Deportes</ion-chip>
+      <ion-chip color="warning">Estrategia</ion-chip>
+      <ion-chip color="danger">Shooter</ion-chip>
+    </div>
+  </div>
 </ion-content>
