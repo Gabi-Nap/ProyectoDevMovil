@@ -25,7 +25,6 @@ interface RespuestaApi {
 })
 
 export class JuegosService { 
-  // ⚠️ TU CLAVE YA ESTÁ AQUÍ. ¡Perfecto!
   private apiKey = `ebcf970455f4455e819b8800ef275506`;
   private apiUrl = `https://api.rawg.io/api/games?key=${this.apiKey}`;
 
@@ -44,5 +43,15 @@ getJuegosPopulares(genero?: string): Observable<RespuestaApi> {
   }
   console.log('Llamando a la API de juegos:', url);
     return this.http.get<RespuestaApi>(url);
+}
+
+/**
+ * @function getJuegos
+ * @param termino Término de búsqueda para filtrar juegos.
+ * @returns retorna un Observable con los resultados de la búsqueda.
+ */
+getJuegos(termino: string): Observable<RespuestaApi> {  
+  const url = `${this.apiUrl}&search=${termino}&page_size=10`;
+  return this.http.get<RespuestaApi>(url);
 }
 }
