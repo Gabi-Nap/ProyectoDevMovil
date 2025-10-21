@@ -11,9 +11,9 @@
       <p>juan@ejemplo.com</p>
     </div>
   </div>
-  </ion-content>
-  
-  <ion-content class="ion-padding">
+</ion-content>
+
+<ion-content class="ion-padding">
   <ion-item>
     <ion-label position="floating">Email</ion-label>
     <ion-input [(ngModel)]="email" type="email"></ion-input>
@@ -23,67 +23,7 @@
     <ion-label position="floating">Password</ion-label>
     <ion-input [(ngModel)]="password" type="password"></ion-input>
   </ion-item>
-
+  <a href="/tabs/register"><p>¿No tienes una cuenta? Registrate</p></a>
   <ion-button expand="block" (click)="login()">Login</ion-button>
-  <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button>
+  <!-- <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button> -->
 </ion-content>
-<!-- 
-  
-  <section class="estadisticas">
-    <h3>Mis Estadísticas</h3>
-    <div class="estadisticas-div">
-      <div class="estadisticas-item">
-        <h4>24</h4>
-        <p>Juegos Vistos</p>
-      </div>
-      <div class="estadisticas-item">
-        <h4>8</h4>
-        <p>Favoritos</p>
-      </div>
-      <div class="estadisticas-item">
-        <h4>15</h4>
-        <p>Busquedas</p>
-      </div>
-    </div>
-  </section>
-
-  
-  <div class="menu">
-    <ion-list lines="none">
-      <ion-item button class="menu-opcion">
-        <ion-icon name="heart-outline" slot="start" color="danger"></ion-icon>
-        <ion-label>Mis Favoritos</ion-label>
-        <ion-badge color="danger" slot="end">8</ion-badge>
-      </ion-item>
-
-      <ion-item button class="menu-opcion">
-        <ion-icon name="time-outline" slot="start" color="warning"></ion-icon>
-        <ion-label>Recientemente Vistos</ion-label>
-      </ion-item>
-
-      <ion-item button class="menu-opcion">
-        <ion-icon name="notifications-outline" slot="start" color="primary"></ion-icon>
-        <ion-label>Notificaciones</ion-label>
-        <ion-badge color="primary" slot="end">3</ion-badge>
-      </ion-item>
-
-      <ion-item button class="menu-opcion">
-        <ion-icon name="settings-outline" slot="start" color="medium"></ion-icon>
-        <ion-label>Configuración</ion-label>
-      </ion-item>
-
-      <ion-item button class="menu-opcion">
-        <ion-icon name="help-circle-outline" slot="start" color="tertiary"></ion-icon>
-        <ion-label>Ayuda y Soporte</ion-label>
-      </ion-item>
-    </ion-list>
-  </div>
-
-  
-  <div class="logout">
-    <ion-button expand="block" color="medium" fill="outline">
-      <ion-icon name="log-out-outline"></ion-icon>
-      Cerrar Sesión
-    </ion-button>
-  </div>
-</ion-content> -->

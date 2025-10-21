@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Presentación de juego</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="juego">
+  <ion-card>
+
+    <img [src]="juego.background_image">
+
+    <ion-card-header>
+      <ion-card-title class="espacio">{{ juego.name }}</ion-card-title>
+      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name }}</ion-card-subtitle>
+      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released }}</ion-card-subtitle>
+
+      <ion-button size="small" color="warning">
+        <ion-icon slot="start" name="star"></ion-icon>
+        Añadir a favoritos
+      </ion-button>
+
+    </ion-card-header>
+
+    <ion-accordion-group>
+      <ion-accordion toggleIcon="caret-down-circle" toggleIconSlot="start">
+        <ion-item slot="header" color="light">
+          <ion-label>Abrir descripción</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <p class="tituloImagenes">{{juego.description}}</p>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+
+  </ion-card>
+
+
+
+  <h2>Imagenes de {{juego.name}}</h2>
+  <p class="tituloImagenes">(Deslizar hacia derecha)</p>
+
+  <div class="scroll-container">
+    <div class="item" *ngFor="let img of listaJuegos">
+      <img [src]="img.image" />
+    </div>
+  </div>
+
+
+</ion-content>

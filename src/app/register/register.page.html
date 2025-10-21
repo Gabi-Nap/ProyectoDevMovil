@@ -1,0 +1,45 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Registrarse</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Información del usuario -->
+  <div class="perfil">
+    <div class="avatar">
+      <ion-avatar>
+        <img src="https://via.placeholder.com/100/3880ff/ffffff?text=US" alt="Usuario">
+      </ion-avatar>
+    </div>
+    <div class="info-usuario">
+      <h2>Juan Pérez</h2>
+      <p>juan@ejemplo.com</p>
+    </div>
+  </div>
+</ion-content>
+
+
+
+<ion-content class="ion-padding">
+  <ion-item>
+    <ion-label position="floating">Nombre</ion-label>
+    <ion-input [(ngModel)]="nombre"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Sexo</ion-label>
+    <ion-input [(ngModel)]="sexo"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label position="floating">Email</ion-label>
+    <ion-input [(ngModel)]="email"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label position="floating">Password</ion-label>
+    <ion-input [(ngModel)]="password"></ion-input>
+  </ion-item>
+
+  <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button>
+  
+</ion-content>

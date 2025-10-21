@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { AuthService } from '../auth/authService';
+import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 
@@ -19,23 +20,12 @@ export class Tab3Page {
     try {
       const user = await this.authService.login(this.email, this.password);
       console.log('Login correcto:', user);
-      alert('¡Bienvenido!');
       this.router.navigate(['/tabs/tab1']);
-
     } catch (err) {
       console.error(err);
-      alert('Error en login: ' + err);
+
     }
   }
 
-  async register() {
-    try {
-      const user = await this.authService.register(this.email, this.password);
-      console.log('Usuario registrado:', user);
-      alert('¡Registro exitoso!');
-    } catch (err) {
-      console.error(err);
-      alert('Error en registro: ' + err);
-    }
-  }
+  
 }

@@ -24,7 +24,7 @@ export class Tab1Page implements OnInit {
     { nombre: 'RPG', slug: 'role-playing-games' },
     { nombre: 'Deportes', slug: 'sports' },
     { nombre: 'Estrategia', slug: 'strategy' },
-    { nombre: 'Shooter', slug: 'shooter' },
+    { nombre: 'Shooter', slug: 'shooter' }
   ];
 
   // Inyectamos el JuegosService

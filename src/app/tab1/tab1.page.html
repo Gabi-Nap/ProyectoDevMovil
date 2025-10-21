@@ -31,11 +31,12 @@
   </div>
 
   <!-- LISTADO DINÁMICO DE JUEGOS -->
+
   <!-- La sección solo se muestra si NO está cargando Y hay juegos en la lista -->
   <div *ngIf="!isLoading && juegos.length > 0" class="juegos-grid p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
     
-    <!-- Iteramos sobre el array 'juegos' obtenido de la API -->
-    <ion-card *ngFor="let juego of juegos" class="juegos-card shadow-lg rounded-lg overflow-hidden">
+    <!-- Iteramos sobre el array 'juegos' obtenido de la API -->                                    <!-- RouterLink agregado para redirigir a otro tabs de acuerdo al id del juego-->
+    <ion-card *ngFor="let juego of juegos" class="juegos-card shadow-lg rounded-lg overflow-hidden" [routerLink]="['/tabs/tab4',juego.id]">
       <!-- La imagen ahora viene de la propiedad background_image -->
       <img [src]="juego.background_image" [alt]="'Imagen de fondo de ' + juego.name" class="w-full h-48 object-cover"/>
       

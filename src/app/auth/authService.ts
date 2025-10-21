@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
 
+// import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+// import { Firestore, doc, setDoc, getDoc, updateDoc } from '@angular/fire/firestore';
+
+import { Firestore, doc, setDoc, getDoc, updateDoc } from '@angular/fire/firestore';
+
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private auth: Auth) {}
+  constructor(private firestore: Firestore,private auth: Auth) {}
 
   // Login
   login(email: string, password: string) {
@@ -22,4 +28,8 @@ export class AuthService {
   logout() {
     return this.auth.signOut();
   }
+  async guardarUsuario(uid: string, datos: any) {
+    const ref = doc(this.firestore, `usuarios/${uid}`);
+    return await setDoc(ref, datos);
+  } 
 }

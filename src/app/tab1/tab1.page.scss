@@ -40,6 +40,8 @@
   gap: 15px;
   padding: 0 15px;
   margin-bottom: 30px;
+  max-width: 530px;
+  margin: 0 auto;
 }
 
 .juegos-card {
@@ -63,6 +65,8 @@
     font-size: 12px;
     color: var(--ion-color-warning);
   }
+  border: 0.3px solid black;
+  max-width: 220px;
 }
 
 .categorias {
