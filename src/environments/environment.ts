@@ -9,13 +9,13 @@ import { getAnalytics } from "firebase/analytics";
 export const environment = {
   production: false,
   firebaseConfig: {
-    apiKey: "AIzaSyBXqvtHIlUOgaGrjbU7bDmBotjXq6LV6t8",
-    authDomain: "grupo-12-login.firebaseapp.com",
-    projectId: "grupo-12-login",
-    storageBucket: "grupo-12-login.appspot.com",
-    messagingSenderId: "55784355297",
-    appId: "1:55784355297:web:8564908f77a3786534ae0",
-    measurementId: "G-VWNa9BJTZ3"
+    apiKey: "AIzaSyANNiR6qA0lwDxlicoB5aOa1B5VVUasOmQ",
+    authDomain: "awaawa-4c9bb.firebaseapp.com",
+    projectId: "awaawa-4c9bb",
+    storageBucket: "awaawa-4c9bb.firebasestorage.app",
+    messagingSenderId: "258995613747",
+    appId: "1:258995613747:web:743e15fe47a61ddc617346",
+    measurementId: "G-7V4SMVXDD7"
   }
 };
 

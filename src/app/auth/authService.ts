@@ -1,35 +1,36 @@
 import { Injectable } from '@angular/core';
-import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth, signOut } from '@angular/fire/auth';
 
 // import { Auth, signInWithEmailAndPassword, createUserWithEmailAndPassword } from '@angular/fire/auth';
 // import { Firestore, doc, setDoc, getDoc, updateDoc } from '@angular/fire/firestore';
 
-import { Firestore, doc, setDoc, getDoc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc, getDoc, updateDoc, getFirestore } from '@angular/fire/firestore';
+import { initializeApp } from 'firebase/app';
+import { environment } from 'src/environments/environment';
+import { Auth} from '@angular/fire/auth'
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-
-  constructor(private firestore: Firestore,private auth: Auth) {}
+  
+  constructor(private authService:Auth) { }
 
   // Login
-  login(email: string, password: string) {
-    return signInWithEmailAndPassword(this.auth, email, password);
+  async login(email: string, password: string) {
+    return await signInWithEmailAndPassword(this.authService, email, password);
   }
 
   // Registro
-  register(email: string, password: string) {
-    return createUserWithEmailAndPassword(this.auth, email, password);
+  async register(email: string, password: string) {
+    return await createUserWithEmailAndPassword(this.authService, email, password);
   }
 
   // Logout
-  logout() {
-    return this.auth.signOut();
+
+  async cerrarSesion() {
+    return await signOut(this.authService)
+      
   }
-  async guardarUsuario(uid: string, datos: any) {
-    const ref = doc(this.firestore, `usuarios/${uid}`);
-    return await setDoc(ref, datos);
-  } 
 }

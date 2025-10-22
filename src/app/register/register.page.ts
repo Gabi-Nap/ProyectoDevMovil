@@ -1,8 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
-import { AuthService } from '../auth/authService';
-import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+
+
+
+
+import { doc, Firestore, getFirestore, setDoc } from 'firebase/firestore';
+import { environment } from '../../environments/environment'
+import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
+import { initializeApp } from 'firebase/app';
+import { Auth} from '@angular/fire/auth'
 
 @Component({
   selector: 'app-register',
@@ -12,32 +19,38 @@ import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
 })
 export class RegisterPage {
 
-  constructor(private auth: Auth, private authService: AuthService, public router: Router) { }
-  email = '';
-  password = '';
-  nombre = '';
-  sexo = '';
+  constructor(public router: Router,private auth:Auth) { }
 
+  email :string= '';
+  password :string= '';
+  confirmPassword :string= '';
+  nombre:string = '';
+  nacionalidad:string = '';
+  errorMessage :string= '';
+  // ---------------
   async register() {
+    const app = initializeApp(environment.firebaseConfig);
+    const db = getFirestore(app);
+    const auth = this.auth;
+    if (this.password !== this.confirmPassword) {
+      this.errorMessage = 'Las contraseñas no coinciden';
+      return;
+    }
     try {
-      const userCredential = await createUserWithEmailAndPassword(this.auth, this.email, this.password);
-      const uid = userCredential.user.uid;
-
-      // Guardar datos extras en Firestore
-      await this.authService.guardarUsuario(uid, {
-        nombre: this.nombre,
-        sexo: this.sexo,
-
-        password: this.password,
-
+      const credencialUsuario = await createUserWithEmailAndPassword(auth, this.email, this.password);//Aca crearemos un usuario agarrando el correo y la contraseña
+      const uid = credencialUsuario.user.uid;//Guarda el UID del usuario en la variable
+      //funcion para guardar datos del usuario al registrarse en firestore
+      await setDoc(doc(db, "usuarios", uid), {
+        nombre: this.nombre,        
+        nacionalidad: this.nacionalidad,
         email: this.email
-        
       });
-      this.router.navigate(['/tabs/tab3']);
+      console.log('usuario registrado correctamente',uid)
+    } catch (error:any) {
       
-
-    } catch (error) {
-      console.error(error);
+        this.errorMessage = error.message;
+        console.log('no se pudo registrar');
+      
     }
   }
 
