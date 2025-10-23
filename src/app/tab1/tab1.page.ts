@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { JuegosService } from '../services/juegos'; 
 import { Juego } from '../services/juegos'; 
+import { AuthService } from '../auth/authService';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab1',
@@ -9,7 +11,7 @@ import { Juego } from '../services/juegos';
   standalone: false,
 })
 export class Tab1Page implements OnInit {
-  
+
   juegos: Juego[] = []; 
   isLoading: boolean = true; 
   
@@ -28,7 +30,7 @@ export class Tab1Page implements OnInit {
   ];
 
   // Inyectamos el JuegosService
-  constructor(private juegosService: JuegosService) {}
+  constructor(private juegosService: JuegosService,private authService:AuthService,private route:Router) {}
 
   // Se ejecuta una vez que el componente se inicializa
   ngOnInit() {
@@ -70,5 +72,11 @@ export class Tab1Page implements OnInit {
         this.isLoading = false; 
       }
     });
+  }
+
+  //boton logout
+  async logout(){
+    await this.authService.logout();
+    this.route.navigate(["/login"]);
   }
 }
