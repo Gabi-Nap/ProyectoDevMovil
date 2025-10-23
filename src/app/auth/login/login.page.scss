@@ -1,0 +1,41 @@
+.my-custom-button {
+  --background: linear-gradient(135deg, #4a90e2, #007bff);
+  --color: #ffffff;
+  --border-radius: 30px;
+  --padding-start: 24px;
+  --padding-end: 24px;
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  width: 100%;
+  max-width: 320px;
+  height: 48px;
+  margin: 12px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+}
+
+.register-button:hover {
+  --background: linear-gradient(135deg, #0056b3, #003f88);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
+}
+
+.register-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+}
+
+/* 🔹 Responsive: ajusta el tamaño del texto y márgenes en pantallas pequeñas */
+@media (max-width: 480px) {
+  .register-button {
+    font-size: 14px;
+    height: 44px;
+    max-width: 260px;
+  }
+}
+
