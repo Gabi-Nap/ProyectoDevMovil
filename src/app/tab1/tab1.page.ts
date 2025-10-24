@@ -30,7 +30,7 @@ export class Tab1Page implements OnInit {
   ];
 
   // Inyectamos el JuegosService
-  constructor(private juegosService: JuegosService,private authService:AuthService,private route:Router) {}
+  constructor(private juegosService: JuegosService,private authService:AuthService,private router:Router) {}
 
   // Se ejecuta una vez que el componente se inicializa
   ngOnInit() {
@@ -72,11 +72,5 @@ export class Tab1Page implements OnInit {
         this.isLoading = false; 
       }
     });
-  }
-
-  //boton logout
-  async logout(){
-    await this.authService.logout();
-    this.route.navigate(["/login"]);
   }
 }

@@ -4,16 +4,14 @@
     <div class="header flex justify-between items-center px-4">
       <ion-title>GamePage</ion-title>
 
-      <ion-avatar>
+      <ion-avatar routerLink="/tabs/tab3" >
         <!-- Asumimos que esta imagen será dinámica con el login de Firebase -->
-        <img
+          <img
           alt="Silhouette of a person's head"
           src="https://ionicframework.com/docs/img/demos/avatar.svg"
-        />
+          href="/tab3"
+          />
       </ion-avatar>
-      <ion-button color="danger" expand="block" (click)="logout()">
-        Cerrar sesión
-      </ion-button>
     </div>
   </ion-toolbar>
 </ion-header>
@@ -40,6 +38,23 @@
     <p>No se pudieron cargar los juegos o la lista está vacía.</p>
   </div>
 
+  <!-- ⭐️ SECCIÓN DE CATEGORÍAS (DINÁMICA Y CON INTERACCIÓN) -->
+  <div class="categorias p-4 mt-6">
+    <h2 class="text-xl font-bold mb-3">Categorías Populares</h2>
+    <div class="lista-categorias flex flex-wrap gap-2">
+      <!-- ⭐️ Iteramos sobre la lista 'categorias' del componente (Tab1Page) -->
+      <!-- ⭐️ EVENTO CLICK: Llama a la función del componente con el slug y el nombre -->
+      <!-- ⭐️ ESTILO DINÁMICO: Si el filtro activo coincide con el nombre del chip, se pone color 'primary' -->
+      <ion-chip
+        *ngFor="let cat of categorias"
+        (click)="filtrarPorCategoria(cat.slug, cat.nombre)"
+        [color]="filtroActivo === cat.nombre ? 'primary' : 'medium'"
+        class="cursor-pointer"
+      >
+        {{ cat.nombre }}
+      </ion-chip>
+    </div>
+  </div>
   <!-- LISTADO DINÁMICO DE JUEGOS -->
 
   <!-- La sección solo se muestra si NO está cargando Y hay juegos en la lista -->
@@ -84,23 +99,7 @@
     </ion-card>
   </div>
 
-  <!-- ⭐️ SECCIÓN DE CATEGORÍAS (DINÁMICA Y CON INTERACCIÓN) -->
-  <div class="categorias p-4 mt-6">
-    <h2 class="text-xl font-bold mb-3">Categorías Populares</h2>
-    <div class="lista-categorias flex flex-wrap gap-2">
-      <!-- ⭐️ Iteramos sobre la lista 'categorias' del componente (Tab1Page) -->
-      <!-- ⭐️ EVENTO CLICK: Llama a la función del componente con el slug y el nombre -->
-      <!-- ⭐️ ESTILO DINÁMICO: Si el filtro activo coincide con el nombre del chip, se pone color 'primary' -->
-      <ion-chip
-        *ngFor="let cat of categorias"
-        (click)="filtrarPorCategoria(cat.slug, cat.nombre)"
-        [color]="filtroActivo === cat.nombre ? 'primary' : 'medium'"
-        class="cursor-pointer"
-      >
-        {{ cat.nombre }}
-      </ion-chip>
-    </div>
-  </div>
+  
 </ion-content>
 
 <!-- <ion-header [translucent]="true">

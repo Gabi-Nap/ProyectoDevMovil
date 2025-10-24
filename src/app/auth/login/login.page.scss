@@ -1,33 +1,82 @@
-.my-custom-button {
-  --background: linear-gradient(135deg, #4a90e2, #007bff);
-  --color: #ffffff;
-  --border-radius: 30px;
-  --padding-start: 24px;
-  --padding-end: 24px;
-  font-weight: 600;
-  font-size: 16px;
-  text-transform: uppercase;
-  letter-spacing: 0.5px;
-  width: 100%;
-  max-width: 320px;
-  height: 48px;
-  margin: 12px auto;
+.contenedor {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: all 0.3s ease-in-out;
-  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.3);
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); //buscar degradado de la tab1
+  padding: 20px;
 }
 
-.register-button:hover {
-  --background: linear-gradient(135deg, #0056b3, #003f88);
+.formulario {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #757575;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+.items {
+  margin-bottom: 20px;
+  --padding-start: 0;
+  --background: #ffffff;
+  color: #333333cb;
+
+  .iconos {
+    margin-right: 5px;
+    color: #3333336b;
+  }
+}
+
+.login {
+  --border-radius: 5px;
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.login:hover {
+  box-shadow: 0 5px 10px rgba(189, 189, 189, 0.822);
   transform: translateY(-2px);
-  box-shadow: 0 6px 18px rgba(0, 123, 255, 0.4);
 }
 
-.register-button:active {
-  transform: translateY(0);
-  box-shadow: 0 3px 8px rgba(0, 123, 255, 0.3);
+.register {
+  margin-top: 30px;
+  text-align: center;
+
+  p {
+    margin-top: 1px;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    color: #c0c0c0;
+  }
+
+  button {
+    min-width: 100px;
+    padding: 10px 30px;
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(189, 189, 189, 0.822);
+    border-color: #667eea;
+  }
 }
 
 /* 🔹 Responsive: ajusta el tamaño del texto y márgenes en pantallas pequeñas */
@@ -38,4 +87,3 @@
     max-width: 260px;
   }
 }
-

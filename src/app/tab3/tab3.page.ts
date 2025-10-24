@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { AuthService } from '../auth/authService';
 import { Auth, createUserWithEmailAndPassword } from '@angular/fire/auth';
+import { AuthService } from '../auth/authService';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-tab3',
@@ -13,9 +12,12 @@ import { Router } from '@angular/router';
 export class Tab3Page {
   email = '';
   password = '';
-
   constructor(private authService: AuthService,private router: Router) {}
-
+  //boton logout
+  async logout(){
+    await this.authService.logout();
+    this.router.navigate(["/login"]);
+  }
   async login() {
     try {
       const user = await this.authService.login(this.email, this.password);
@@ -26,6 +28,4 @@ export class Tab3Page {
 
     }
   }
-
-  
 }

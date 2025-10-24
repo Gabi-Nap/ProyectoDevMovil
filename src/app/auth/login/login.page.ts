@@ -24,7 +24,7 @@ password = "";
       console.log("login correcto" , user);
       this.router.navigate(['/tabs/tab1']); // Redirige al contenido principal
     }catch (err){
-      console.error("Error al iniciar sesione", err);
+      console.error("Error al iniciar sesion", err);
     }
   }
 
