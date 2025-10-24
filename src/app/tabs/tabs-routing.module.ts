@@ -32,6 +32,10 @@ const routes: Routes = [
         loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
       },
       {
+        path: 'favoritos',
+        loadChildren: () => import('../favoritos/favoritos.module').then(m => m.FavoritosPageModule)
+      },
+      {
         path: '',
         redirectTo: '/tabs/tab3',
         pathMatch: 'full'

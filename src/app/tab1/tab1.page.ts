@@ -13,10 +13,10 @@ export class Tab1Page implements OnInit {
   juegos: Juego[] = []; 
   isLoading: boolean = true; 
   
-  // ⭐️ Variable para rastrear qué chip está seleccionado (usado para el color en HTML)
+  // Variable para rastrear qué chip está seleccionado (usado para el color en HTML)
   filtroActivo: string = 'Todos';
 
-  // ⭐️ Lista de chips: 'nombre' es para mostrar, 'slug' es para la API de RAWG
+  // Lista de chips: 'nombre' es para mostrar, 'slug' es para la API de RAWG
   categorias = [
     { nombre: 'Todos', slug: '' }, // Slug vacío para no filtrar
     { nombre: 'Acción', slug: 'action' },
@@ -55,7 +55,7 @@ export class Tab1Page implements OnInit {
   cargarJuegos(generoSlug: string = ''){
     this.isLoading = true;
     
-    // ⭐️ Pasamos el slug de género al servicio
+    // Pasamos el slug de género al servicio
     this.juegosService.getJuegosPopulares(generoSlug).subscribe({
       next: (Response) => {
         this.juegos = Response.results;

@@ -18,22 +18,23 @@ export class LoginPage {
   password :string= '';
   mostrarPassword: boolean = false;
   errorMessage: string = '';
-  constructor(private router: Router, private cierro: AuthService,private authService:Auth) { }
+  constructor(private router: Router, private authService: AuthService,private auth:Auth) { }
 
   async login() {
     try {
-     await this.cierro.login(this.email,this.password);
-     console.log('Te conectaste bien')
-    } catch (error) {      
+     await this.authService.login(this.email,this.password);
+     console.log(this.authService.usuarioCredencial.user)
+    } catch (error:any) {      
       this.errorMessage = 'Email o contraseña incorrectos';
+      console.log('error de conexion')
     }
   }
   sesionCerrada() {
-    this.cierro.cerrarSesion()
+    this.authService.cerrarSesion()
     console.log('sesion cerrada');
   }
   verConsola() {
-    const auth = this.authService;
+    const auth:any = this.authService;
     onAuthStateChanged(auth, (user) => {
       if (user) {
       

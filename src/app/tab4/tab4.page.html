@@ -14,7 +14,7 @@
       <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name }}</ion-card-subtitle>
       <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released }}</ion-card-subtitle>
 
-      <ion-button size="small" color="warning">
+      <ion-button size="small" color="warning" (click)="agregarFavoritos(juego.id,juego.name)">
         <ion-icon slot="start" name="star"></ion-icon>
         Añadir a favoritos
       </ion-button>

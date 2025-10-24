@@ -1,13 +1,48 @@
-<ion-content [fullscreen]="true">
-  <!-- Información del usuario -->
-  <div class="perfil">
-    <div class="avatar">
-    </div>
-    <div class="info-usuario">
-      <h2>Juan Pérez</h2>
-      <p>juan@ejemplo.com</p>
-    </div>
-  </div>
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding clase">
+
+  <!-- Card de información del usuario -->
+  <ion-card class="contenedor">
+    <ion-card-header >
+      <ion-card-title >Usuario</ion-card-title>
+      <ion-card-subtitle *ngFor="let usuario of datos">{{usuario.uid}}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content  class="profile-card-content">
+      <ion-avatar class="profile-avatar">
+        <img class="imagenPerfil" src="'../../assets/icon/avatar.png'"/>
+      </ion-avatar>
+
+      <ion-item *ngFor="let usuario of datos">
+        <ion-label>
+          <h2>Nombre</h2>
+          <p> {{usuario.email}} </p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item *ngFor="let usuario of datos"> 
+        <ion-label>
+          <h2>Nacionalidad</h2>
+          <p> {{usuario.uid}} </p>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Botón para cerrar sesión -->
+  <ion-button (click)="cerrarSesion()" class="boton" color="danger" >
+    Cerrar sesión
+  </ion-button>
+  <ion-button (click)="apretarEstado()" class="boton" color="danger" >
+    ver consola
+  </ion-button>
+  <ion-button (click)="irAFavoritos()" class="boton" color="danger" >
+    ir a favoritos
+  </ion-button>
+
 </ion-content>
-
-

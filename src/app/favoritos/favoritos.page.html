@@ -1,0 +1,15 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>favoritos</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content color="light">
+  <ion-list [inset]="true">
+    <ion-item *ngFor="let juegofav of favoritos">
+      <ion-label>{{juegofav.id}}</ion-label>
+      <ion-label>{{juegofav.nombre}}</ion-label>
+      <ion-button (click)="eliminarJuego('juegofav')">Eliminar juego</ion-button>
+    </ion-item>    
+  </ion-list>
+</ion-content>

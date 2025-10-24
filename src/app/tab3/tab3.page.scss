@@ -1,78 +1,30 @@
-.perfil {
-  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-danger) 100%);
-  color: rgba(255, 255, 255, 0.616);
-  padding: 30px 20px;
+.contenedor{
+  max-width: 500px;
+  margin: 0 auto;
+}
+.clase{
   text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 0 0 40px 40px;
-  .avatar {
-    margin-bottom: 15px;
-    ion-avatar {
-      width: 80px;
-      height: 80px;
-      border: 1px solid white;
-    }
-  }
-  .info-usuario {
-    h2 {
-      margin-top: 0;
-      margin-bottom: 5px;
-      font-size: 1.3em;
-      font-weight: bold;
-    }
-    p {
-      margin: 0;
-      font-size: 0.9em;
-    }
-  }
 }
+.profile-card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+  }
 
-.estadisticas {
-  padding: 20px;
-  background: var(--ion-color-light);
-  margin: 20px 15px;
-  border-radius: 15px;
-  h3 {
-    margin: 0 0 15px 0;
-    font-size: 1.1em;
-    font-weight: bold;
-    color: var(--ion-color-dark);
-    text-align: center;
+  .profile-avatar {
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
   }
-}
-.estadisticas-div {
-  display: flex;
-  justify-content: space-between;
-  gap: 15px;
-  .estadisticas-item {
-    text-align: center;
-    margin: 0 50px;
-    h4{
-      font-size: 1.8em;
-      color: var(--ion-color-primary);
-    }
-    p{
-      font-size: 0.9em;
-      color: var(--ion-color-medium);
-      margin-top: 5px;
-    }
-  }
-}
 
-.menu {
-  .menu-opcion {
-    padding: 0 20px 0 20px;
-    ion-icon {
-      font-size: 1.2em;
-    }
-    ion-label {
-      font-weight: 500px;
-    }
+  ion-item {
+    width: 100%;
   }
-}
-.logout{
-  padding: 20px;
-  margin-top: 20px;
-}
+  .imagenPerfil{
+    background-color: black;
+  }
+  .boton{
+    width: 100%;
+    max-width: 500px;
+  }
