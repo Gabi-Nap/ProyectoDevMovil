@@ -1,4 +1,4 @@
-
+/*
 ion-title{
     text-align: center;
 }
@@ -79,4 +79,144 @@ ion-title{
 .logout{
   padding: 20px;
   margin-top: 20px;
+}*/
+
+.contenedor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); //buscar degradado de la tab1
+  padding: 20px;
+}
+
+.formulario {
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+
+  h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #757575;
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+}
+
+.subtitle {
+  display: flex;
+  ion-icon {
+    margin-right: 8px;
+    color: #3333336b;
+  }
+
+  p {
+    font-size: 1rem;
+    color: #333333cb;
+    margin: 0;
+  }
+}
+
+.items {
+  margin-bottom: 20px;
+  --padding-start: 0;
+  --background: #ffffff;
+  color: #333333cb;
+  --min-height: 35px !important;
+  //min-height: 35px !important;
+  //--padding-top: 0 !important;
+  //--padding-bottom: 0 !important;
+width: 100%;
+  .iconos {
+    margin-right: 5px;
+    color: #3333336b;
+  }
+
+  ion-input {
+    --padding-top: 6px !important;
+    --padding-bottom: 6px !important;
+    min-height: 35px !important;
+  }
+
+}
+
+.login {
+  --border-radius: 5px;
+  --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #ffffff;
+  transition: all 0.3s ease;
+  font-size: 1rem;
+}
+
+.login:hover {
+  box-shadow: 0 5px 10px rgba(189, 189, 189, 0.822);
+  transform: translateY(-2px);
+}
+
+.register {
+  margin-top: 30px;
+  text-align: center;
+
+  p {
+    margin-top: 1px;
+    margin-bottom: 2px;
+    font-size: 0.9rem;
+    color: #c0c0c0;
+  }
+
+  button {
+    min-width: 100px;
+    padding: 10px 30px;
+    margin-top: 10px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    color: white;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+
+  button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 10px rgba(189, 189, 189, 0.822);
+    border-color: #667eea;
+  }
+}
+
+.select-genero {
+  width: 100%;
+  
+  .genero {
+    width: 100%;
+    //padding: 0px 40px 15px 0;
+    border: none;
+    background: transparent;
+    //font-size: 16px;
+    appearance: none;
+    //-webkit-appearance: none;
+    //-moz-appearance: none;
+    outline: none;
+  }
+  
+  .flecha-icon {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    //pointer-events: none;
+  }
+}
+  
+/* 🔹 Responsive: ajusta el tamaño del texto y márgenes en pantallas pequeñas */
+@media (max-width: 480px) {
+  .register-button {
+    font-size: 14px;
+    height: 44px;
+    max-width: 260px;
+  }
 }
