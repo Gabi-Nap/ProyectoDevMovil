@@ -85,7 +85,7 @@ ion-title{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); //buscar degradado de la tab1
   padding: 20px;
 }
@@ -109,6 +109,7 @@ ion-title{
 
 .subtitle {
   display: flex;
+
   ion-icon {
     margin-right: 8px;
     color: #3333336b;
@@ -130,7 +131,8 @@ ion-title{
   //min-height: 35px !important;
   //--padding-top: 0 !important;
   //--padding-bottom: 0 !important;
-width: 100%;
+  width: 100%;
+
   .iconos {
     margin-right: 5px;
     color: #3333336b;
@@ -142,9 +144,32 @@ width: 100%;
     min-height: 35px !important;
   }
 
+  .ojo {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    background: transparent;
+
+    .iconos {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+      color: #3333336b;
+      margin-right: 0;
+    }
+  }
+
+  .ojo_ocultar {
+
+    pointer-events: none;
+  }
 }
 
-.login {
+.register {
   --border-radius: 5px;
   --background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: #ffffff;
@@ -152,12 +177,12 @@ width: 100%;
   font-size: 1rem;
 }
 
-.login:hover {
+.register:hover {
   box-shadow: 0 5px 10px rgba(189, 189, 189, 0.822);
   transform: translateY(-2px);
 }
 
-.register {
+.login {
   margin-top: 30px;
   text-align: center;
 
@@ -189,7 +214,7 @@ width: 100%;
 
 .select-genero {
   width: 100%;
-  
+
   .genero {
     width: 100%;
     //padding: 0px 40px 15px 0;
@@ -201,7 +226,7 @@ width: 100%;
     //-moz-appearance: none;
     outline: none;
   }
-  
+
   .flecha-icon {
     position: absolute;
     right: 10px;
@@ -211,7 +236,11 @@ width: 100%;
     //pointer-events: none;
   }
 }
-  
+
+.text-error {
+  padding: 0px;
+}
+
 /* 🔹 Responsive: ajusta el tamaño del texto y márgenes en pantallas pequeñas */
 @media (max-width: 480px) {
   .register-button {

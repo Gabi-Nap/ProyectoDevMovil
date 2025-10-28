@@ -50,13 +50,29 @@ export class JuegosService {
     return this.http.get(`https://api.rawg.io/api/games/${id}?key=${this.apiKey}`);
   }
   //FUNCION PARA BUSCAR UN JUEGO POR EL INPUT CON EL APIKEY
+  /**
+   * Buscar 5 juegos ordenados por numero de reviews
+   * @param nombre 
+   * @returns 
+   */
   buscarJuegos(nombre: string) {
-    return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}&search=${nombre}`);
-  }
+  return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}&search=${nombre}&page_size=5&ordering=-reviews_count`);
+}
   //ESTO ES PARA OBTENER LISTA DE IMAGENES SCREENSHOOT SOBRE EL JUEGO QUE APRETEMOS
   obtenerImagenes(id: string){
     return this.http.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${this.apiKey}`);
     //ejemplo:  https://api.rawg.io/api/games/795632/screenshots?key=ebcf970455f4455e819b8800ef275506
   }
+  /**
+   * Obtener juegos populares del año actual (3)
+   * @param
+   * @returns 
+   */
+  getJuegosSugeridos(limit: number = 4): Observable<RespuestaApi> {
+  const añoActual = new Date().getFullYear();
+  const url = `${this.apiUrl}&ordering=-rating&dates=${añoActual}-01-01,${añoActual}-12-31&page_size=${limit}`;
+  console.log('Cargando juegos populares del año:', url);
+  return this.http.get<RespuestaApi>(url);
+}
 }
 

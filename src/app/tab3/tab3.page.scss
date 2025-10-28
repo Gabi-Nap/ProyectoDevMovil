@@ -1,58 +1,167 @@
-.header{
+.perfil {
+  background: linear-gradient(135deg, var(--ion-color-primary) 0%, var(--ion-color-danger) 100%);
+  color: rgba(255, 255, 255, 0.616);
+  padding: 30px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 0 0 40px 40px;
+  position: relative;
+  .logout{
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 14px;
+    z-index: 10;
+  }
+  .profile-avatar {
+    display: inline-block;
+    position: relative;
+
+    img {
+      margin-bottom: 15px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    ion-icon {
+      position: absolute;
+      bottom: -3px;
+      right: -3px;
+      padding: 3px;
+      font-size: 16px;
+      background-color: rgb(107, 107, 107);
+      color: white;
+      border-radius: 100%;
+      border: white solid 1px;
+      cursor: pointer;
+    }
+    ion-icon:hover{
+      box-shadow: 0 2px 5px rgba(189, 189, 189, 0.822);
+    }
+  }
+
+  .info-usuario {
+    h2 {
+      margin-top: 0;
+      margin-bottom: 5px;
+      font-size: 1.3em;
+      font-weight: bold;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.9em;
+    }
+  }
+}
+
+.contenedor {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-family: 'Roboto', sans-serif;
+  margin: 20px;
+}
+
+.card {
+  background: #aaaaaa;
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  width: 100%;
+}
+
+.card-titulo {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 10px;
-  ion-avatar {
-    width: 40px;
-    height: 40px;
-    overflow: hidden;
-    
+  margin-bottom: 14px;
+  cursor: pointer;
+  span {
+    background: #000000;
+    color: #ffffff;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 8px;
+    border-radius: 12px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin: 0;
+    color: rgba(0, 0, 0, 0.603);
   }
 }
 
 
-
-.contenedor{
-  max-width: 500px;
-  margin: 0 auto;
+.boton {
+  background: none;
+  border: none;
+  font-size: 13px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  color: #333;
+  opacity: 0.9;
 }
-.clase{
-  text-align: center;
-}
-.profile-card-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
-  }
 
-  .profile-avatar {
-    width: 120px;
-    height: 120px;
+.item {
+  //margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  //border-radius: 8px;
+  border-bottom: rgba(0, 0, 0, 0.425) solid 1px;
+  p {
+    font-size: 14px;
+    font-weight: 500;
+    margin-top: 2px;
+    color: #000;
     margin-bottom: 10px;
   }
 
-  ion-item {
-    width: 100%;
+  span {
+    font-size: 12px;
+    color: #666;
   }
-  .imagenPerfil{
-    background-color: black;
-  }
-  .boton{
-    width: 100%;
-    max-width: 500px;
-  }
-  .avatar-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
 }
+.favoritos{
+  .card-titulo{
+    margin-bottom: 0;
+  }
+}
+.favoritos-list {
+  h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 0;
+    color: #222;
+  }
 
-.avatar {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 3px solid #000;
+  p {
+    font-size: 12px;
+    margin: 2px 0 0;
+    color: #7a7a7a;
+  }
+
+  ion-icon {
+    font-size: 20px;
+    opacity: 0.7;
+    margin-left: auto;
+  }
+
+  background:transparent !important;
+
+  ion-item {
+    --background: transparent !important;
+  }
 }

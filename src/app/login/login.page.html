@@ -1,6 +1,6 @@
 <ion-content [fullscreen]="true">
   <div class="contenedor">
-    <form  class="formulario">
+    <form class="formulario">
       <h1>Iniciar sesión</h1>
 
       <ion-item class="items">
@@ -10,13 +10,19 @@
 
       <ion-item class="items">
         <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
-        <ion-input [(ngModel)]="password" name="password" type="password" required
-          placeholder="Ingrese su contraseña"></ion-input>
+        <ion-input name="password" [type]="mostrarPassword ? 'text' : 'password'" type="password" [(ngModel)]="password"
+          required placeholder="Ingrese su contraseña">
+        </ion-input>
+        <button type="button" class="ojo" (click)="ocultarContra()">
+          <ion-icon [name]="mostrarPassword ? 'eye-outline':'eye-off-outline'" class="iconos"> </ion-icon>
+        </button>
       </ion-item>
+      <ion-text color="danger" *ngIf="errorMessage">
+        <p class="text-error">{{ errorMessage }}</p>
+      </ion-text>
 
-      
-      <ion-button expand="block" (click)="login()" class="login" id="open-toast">Ingresar</ion-button>
-      
+
+      <ion-button expand="block" type="submit" (click)="login()" class="login">Ingresar</ion-button>
 
       <div class="register">
         <p>¿No tienes una cuenta?</p>
@@ -24,5 +30,4 @@
       </div>
     </form>
   </div>
-
 </ion-content>

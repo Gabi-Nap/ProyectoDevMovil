@@ -12,7 +12,7 @@
         </ion-thumbnail>
         <ion-label>
           <h2>{{ juego.name }}</h2><!--Nombre del juego dentro de la lista-->
-          <p>Lanzamiento: {{ juego.released }}</p><!--fecha de lanzamiento del juego dentro de la lista-->
+          <p>Lanzamiento: {{ juego.released ?? 'Fecha no disponible' }}</p><!--fecha de lanzamiento del juego dentro de la lista-->
         </ion-label>
       </ion-item>
     </ion-list>    
@@ -20,7 +20,19 @@
   <!-- Juegos sugeridos -->
   <div class="sugerencia">
     <h2>Juegos Sugeridos</h2>
-
+    <ion-list lines="none">
+      <ion-item class="sugerencia-juego" *ngFor="let juego of juegosSugeridos" [routerLink]="['/tabs/tab4',juego.id]">
+        <ion-avatar slot="start">
+          <img [src]="juego.background_image" [alt]="juego.name">
+        </ion-avatar>
+        <ion-label>
+          <h3>{{ juego.name }}</h3>
+          <p>Lanzamiento: {{ juego.released ?? 'Fecha no disponible' }}</p>
+        </ion-label>
+        <ion-badge color="primary" slot="end">{{ juego.rating | number:'1.1-1'  }}/5</ion-badge>
+      </ion-item>
+    </ion-list>
+<!--
     <ion-list lines="none">
       <ion-item class="sugerencia-juego">
         <ion-avatar slot="start">
@@ -34,19 +46,40 @@
         </ion-label>
         <ion-badge color="primary" slot="end">4.5</ion-badge>
       </ion-item>
-
-      <ion-item class="sugerencia-juego">
+<ion-item class="sugerencia-juego">
         <ion-avatar slot="start">
           <img
-            src="https://imgs.search.brave.com/VIR1TtPzvtHIAndkdudJy-qzGPBna_TFEPnuDSQGvjs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA2LzMxLzIwLzM1/LzM2MF9GXzYzMTIw/MzUxNF9TUVpDNFF4/aTVVbnVvR1hLWTNW/aEZBVFRnWXJSYXd2/SC5qcGc"
+            src=""
+            alt="GTA V">
+        </ion-avatar>
+        <ion-label>
+          <h3>Grand Theft Auto V</h3>
+          <p>Acción</p>
+        </ion-label>
+        <ion-badge color="primary" slot="end">4.5</ion-badge>
+      </ion-item>
+
+
+
+
+      <ion-item class="sugerencia-juego" *ngFor="let juego of juegos">
+        <ion-avatar slot="start">
+          <img
+           [src]="juego.background_image"
             alt="Monster Hunter">
         </ion-avatar>
         <ion-label>
-          <h3>Monster Hunter: World</h3>
-          <p>RPG - Acción</p>
+          <h3>{{juego.name}}</h3>
+          <p>{{juego.released}}</p>
         </ion-label>
         <ion-badge color="primary" slot="end">4.3</ion-badge>
       </ion-item>
+
+
+
+
+
+
 
       <ion-item class="sugerencia-juego">
         <ion-avatar slot="start">
@@ -60,7 +93,7 @@
         </ion-label>
         <ion-badge color="primary" slot="end">4.2</ion-badge>
       </ion-item>
-    </ion-list>
+    </ion-list>-->
   </div>
 
 </ion-content>

@@ -1,59 +1,58 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="header flex justify-between items-center px-4">
-      <ion-title>Perfil</ion-title>
-      <ion-button (click)="cerrarSesion()" color="danger">CERRAR SESIÓN</ion-button>
-    </div>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Usuario</ion-card-title>
-      <ion-card-subtitle>{{ datos.uid }}</ion-card-subtitle><!-- Id del usuario mostrado en la parte superior -->
-    </ion-card-header>
-
-    <ion-card-content class="ion-text-center">
-      <div class="avatar-container">
-        <img [src]="fotoPerfil" alt="Foto de perfil" class="avatar" />
+<ion-content fullscreen="true">
+  <div class="perfil">
+    <!--<ion-card-header>
+      <ion-card-subtitle>{{ datos.uid }}</ion-card-subtitle> Id del usuario mostrado en la parte superior
+    </ion-card-header>-->
+    <button class="logout" (click)="cerrarSesion()">Cerrar Sesion</button>
+    <ion-avatar class="profile-avatar">
+      <img [src]="fotoPerfil" alt="Foto de perfil" class="avatar" />
+      <ion-icon name="camera" (click)="fileInput.click()">
+        <input type="file" accept="image/*" #fileInput hidden (change)="subirFotoPerfil($event)" />
+      </ion-icon>
+    </ion-avatar>
+  </div>
+  <div class="contenedor">
+    <div class="card">
+      <div class="card-titulo">
+        <h3>Datos del perfil</h3>
+        <button class="boton">
+          <ion-icon name="create-outline"></ion-icon>
+          Editar
+        </button>
       </div>
+      <div class="item">
+        <div>
+          <span>Nombre</span>
+          <p>{{ datos.nombre }}</p>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <span>Email</span>
+          <p>{{ datos.email }}</p>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <span>Sexo</span>
+          <p>{{ datos.sexo }}</p>
+        </div>
+      </div>
+      <div class="item">
+        <div>
+          <span>Uid</span>
+          <p>{{ datos.uid }}</p>
+        </div>
+      </div>
+    </div>
+    <div class="card favoritos" (click)="irAFavoritos()">
+      <div class="card-titulo">
+        <ion-icon name="star-outline"></ion-icon><h3>Mis Favoritos</h3><ion-icon name="star-outline"></ion-icon>
+      </div>
+    </div>
+  </div>
 
-      <input type="file" accept="image/*" #fileInput hidden (change)="subirFotoPerfil($event)" />
-
-      <ion-button expand="block" color="medium" (click)="fileInput.click()">
-        Cambiar foto de perfil
-      </ion-button>
-
-      <ion-button expand="block" color="primary" (click)="irAFavoritos()">
-        Ir a favoritos
-      </ion-button>
-    </ion-card-content>
-  </ion-card>
-
-  <ion-item>
-    <ion-label>
-      <h2>Email</h2>
-      <p>{{ datos.email }}</p>
-    </ion-label>
-  </ion-item>
-
-  <ion-item>
-    <ion-label>
-      <h2>UID</h2>
-      <p>{{ datos.uid }}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <h2>Nombre</h2>
-      <p>{{ datos.nombre }}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <h2>Sexo</h2>
-      <p>{{ datos.sexo }}</p>
-    </ion-label>
-  </ion-item>
+  <!--<ion-button expand="block" color="primary" (click)="irAFavoritos()">
+    Ir a favoritos
+  </ion-button>-->
 </ion-content>

@@ -30,6 +30,8 @@ export class RegisterPage {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+    mostrarPassword: boolean = false;
+  mostrarConfirmPassword: boolean = false;
   nombreUsuario: string = '';
   sexo: string = '';
   errorMessage: string = '';
@@ -61,5 +63,10 @@ export class RegisterPage {
       console.log('no se pudo registrar');
     }
   }
-
+ocultarContra() {
+    this.mostrarPassword = !this.mostrarPassword;
+  }
+  ocultarConfirmContra() {
+    this.mostrarConfirmPassword = !this.mostrarConfirmPassword;
+  }
 }
