@@ -22,29 +22,21 @@ const routes: Routes = [
       {//Esto de aca redirigira a un tab donde se va a agarrar el id
         path: 'tab4/:id',
         loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
-      },
-      {
-        path: 'register',
-        loadChildren: () => import('../register/register.module').then(m => m.RegisterPageModule)
-      },
-      {
-        path: 'login',
-        loadChildren: () => import('../login/login.module').then(m => m.LoginPageModule)
-      },
+      },       
       {
         path: 'favoritos',
         loadChildren: () => import('../favoritos/favoritos.module').then(m => m.FavoritosPageModule)
       },
       {
         path: '',
-        redirectTo: '/tabs/tab3',
+        redirectTo: '/login',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/login',
     pathMatch: 'full'
   }
 ];

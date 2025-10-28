@@ -1,48 +1,59 @@
-<ion-header>
-  <ion-toolbar color="primary">
-    <ion-title>Perfil</ion-title>
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <div class="header flex justify-between items-center px-4">
+      <ion-title>Perfil</ion-title>
+      <ion-button (click)="cerrarSesion()" color="danger">CERRAR SESIÓN</ion-button>
+    </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="ion-padding clase">
-
-  <!-- Card de información del usuario -->
-  <ion-card class="contenedor">
-    <ion-card-header >
-      <ion-card-title >Usuario</ion-card-title>
-      <ion-card-subtitle *ngFor="let usuario of datos">{{usuario.uid}}</ion-card-subtitle>
+<ion-content>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Usuario</ion-card-title>
+      <ion-card-subtitle>{{ datos.uid }}</ion-card-subtitle><!-- Id del usuario mostrado en la parte superior -->
     </ion-card-header>
 
-    <ion-card-content  class="profile-card-content">
-      <ion-avatar class="profile-avatar">
-        <img class="imagenPerfil" src="'../../assets/icon/avatar.png'"/>
-      </ion-avatar>
+    <ion-card-content class="ion-text-center">
+      <div class="avatar-container">
+        <img [src]="fotoPerfil" alt="Foto de perfil" class="avatar" />
+      </div>
 
-      <ion-item *ngFor="let usuario of datos">
-        <ion-label>
-          <h2>Nombre</h2>
-          <p> {{usuario.email}} </p>
-        </ion-label>
-      </ion-item>
+      <input type="file" accept="image/*" #fileInput hidden (change)="subirFotoPerfil($event)" />
 
-      <ion-item *ngFor="let usuario of datos"> 
-        <ion-label>
-          <h2>Nacionalidad</h2>
-          <p> {{usuario.uid}} </p>
-        </ion-label>
-      </ion-item>
+      <ion-button expand="block" color="medium" (click)="fileInput.click()">
+        Cambiar foto de perfil
+      </ion-button>
+
+      <ion-button expand="block" color="primary" (click)="irAFavoritos()">
+        Ir a favoritos
+      </ion-button>
     </ion-card-content>
   </ion-card>
 
-  <!-- Botón para cerrar sesión -->
-  <ion-button (click)="cerrarSesion()" class="boton" color="danger" >
-    Cerrar sesión
-  </ion-button>
-  <ion-button (click)="apretarEstado()" class="boton" color="danger" >
-    ver consola
-  </ion-button>
-  <ion-button (click)="irAFavoritos()" class="boton" color="danger" >
-    ir a favoritos
-  </ion-button>
+  <ion-item>
+    <ion-label>
+      <h2>Email</h2>
+      <p>{{ datos.email }}</p>
+    </ion-label>
+  </ion-item>
 
+  <ion-item>
+    <ion-label>
+      <h2>UID</h2>
+      <p>{{ datos.uid }}</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <h2>Nombre</h2>
+      <p>{{ datos.nombre }}</p>
+    </ion-label>
+  </ion-item>
+  <ion-item>
+    <ion-label>
+      <h2>Sexo</h2>
+      <p>{{ datos.sexo }}</p>
+    </ion-label>
+  </ion-item>
 </ion-content>

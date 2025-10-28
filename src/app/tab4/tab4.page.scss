@@ -30,3 +30,64 @@ ion-card-title{
     margin: 10px auto;
     --color: black;
 }
+// -------------------------
+.comentarios-container {
+  padding: 16px;
+  background: #f5f7fa;
+}
+
+.comentario-form {
+  background: white;
+  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  margin-bottom: 20px;
+}
+
+.upload-section {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+  gap: 10px;
+
+  span {
+    font-size: 14px;
+    color: #666;
+  }
+}
+
+.comentarios-lista {
+  .comentario-item {
+    background: white;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    padding: 10px;
+
+    ion-avatar {
+      --border-radius: 50%;
+      img {
+        border: 2px solid #ddd;
+      }
+    }
+
+    .comentario-texto {
+      font-size: 15px;
+      color: #333;
+      margin-bottom: 8px;
+    }
+
+    .comentario-img {
+      width: 100%;
+      border-radius: 10px;
+      margin-bottom: 6px;
+      max-height: 200px;
+      object-fit: cover;
+    }
+
+    .comentario-fecha {
+      font-size: 12px;
+      color: #999;
+    }
+  }
+}

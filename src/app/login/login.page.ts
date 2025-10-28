@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { environment } from '../../environments/environment'
 import { initializeApp } from 'firebase/app';
 import { AuthService } from '../auth/authService'
@@ -23,32 +23,34 @@ export class LoginPage {
   async login() {
     try {
      await this.authService.login(this.email,this.password);
-     console.log(this.authService.usuarioCredencial.user)
+     this.router.navigate(['/tabs/tab1'])
+     console.log(this.authService.usuarioCredencial.user.uid)
+     
     } catch (error:any) {      
       this.errorMessage = 'Email o contraseña incorrectos';
       console.log('error de conexion')
     }
   }
+  //cerrar sesion
   sesionCerrada() {
-    this.authService.cerrarSesion()
+    signOut(this.auth);
     console.log('sesion cerrada');
   }
+  // ---------------------------
+  //¡momentaneo! ver si estamos logueados mostrandonos las credenciales
   verConsola() {
     const auth:any = this.authService;
     onAuthStateChanged(auth, (user) => {
-      if (user) {
-      
+      if (user) {      
         const uid = user.uid;
-        console.log(uid)
-        
+        console.log(uid)        
       } else {
-        console.log('el usuario se deslogueo')
-        // User is signed out
-        // ...
+        console.log('el usuario se deslogueo')        
       }
     });
-
   }
+  // ---------------------------
+  //oculta la contraseña con icono de ojo
   ocultarContra() {
     this.mostrarPassword = !this.mostrarPassword;
   }

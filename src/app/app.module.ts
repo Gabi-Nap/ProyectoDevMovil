@@ -13,11 +13,13 @@ import { JuegosService } from './services/juegos';
 import { Firestore, getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
 // -----------------------------
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,    
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule,HttpClientModule,FormsModule,CommonModule    
   ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy },JuegosService,
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),

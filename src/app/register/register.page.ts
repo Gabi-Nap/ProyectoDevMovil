@@ -14,6 +14,7 @@ import { Auth } from '@angular/fire/auth'
 import { Firestore } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { provideFirebaseApp } from '@angular/fire/app';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -23,51 +24,42 @@ import { provideFirebaseApp } from '@angular/fire/app';
 })
 export class RegisterPage {
   firestore = inject(Firestore);
+  alertController: any;
   constructor(public router: Router, private auth: Auth) { }
 
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
-  nombre: string = '';
-  nacionalidad: string = '';
+  nombreUsuario: string = '';
+  sexo: string = '';
   errorMessage: string = '';
   // ---------------
   async register() {
-    const auth = this.auth;
+    
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'Las contraseñas no coinciden';
       return;
     }
     try {
-      const credencialUsuario = await createUserWithEmailAndPassword(auth, this.email, this.password);//Aca crearemos un usuario agarrando el correo y la contraseña
-      const uid = credencialUsuario.user.uid;//Guarda el UID del usuario en la variable
+      const credencialUsuario = await createUserWithEmailAndPassword(this.auth, this.email, this.password);//Aca crearemos un usuario agarrando el correo y la contraseña
+      const uid = credencialUsuario.user.uid;
+       //Guarda el UID del usuario en la variable
       //funcion para guardar datos del usuario al registrarse en firestore
+
       await setDoc(doc(this.firestore, "usuarios", uid), {
-        nombre: this.nombre,
-        nacionalidad: this.nacionalidad,
+        nombre: this.nombreUsuario,
+        sexo: this.sexo,
+        
         email: this.email
+        
       });
       console.log('usuario registrado correctamente', uid)
+      this.router.navigate(['/login'])
+      
     } catch (error: any) {
-
       this.errorMessage = error.message;
       console.log('no se pudo registrar');
-
     }
   }
-
-
-
-
-  // async register() {
-  //   try {
-  //     const user = await this.authService.register(this.email, this.password);
-  //     console.log('Usuario registrado:', user);
-  //     alert('¡Registro exitoso!');
-  //   } catch (err) {
-  //     console.error(err);
-  //     alert('Error en registro: ' + err);
-  //   }
-  // }
 
 }

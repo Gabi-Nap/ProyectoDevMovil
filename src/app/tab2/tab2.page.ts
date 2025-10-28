@@ -20,7 +20,7 @@ export class Tab2Page {
     if (this.termino.trim() === '') {
       this.juegos = [];
       return;
-    }
+    }    
     this.proveedorService.buscarJuegos(this.termino).subscribe((data: any) => {
       this.juegos = data.results;
     });
