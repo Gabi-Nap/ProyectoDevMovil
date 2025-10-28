@@ -1,16 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-
 import { Router } from '@angular/router';
-
-
-
-
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { environment } from '../../environments/environment'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
 import { initializeApp } from 'firebase/app';
 import { Auth } from '@angular/fire/auth'
-
 import { Firestore } from '@angular/fire/firestore';
 import { inject } from '@angular/core';
 import { provideFirebaseApp } from '@angular/fire/app';
@@ -28,6 +22,8 @@ export class RegisterPage {
   email: string = '';
   password: string = '';
   confirmPassword: string = '';
+  mostrarPassword: boolean = false;
+  mostrarConfirmPassword: boolean = false;
   nombre: string = '';
   nacionalidad: string = '';
   errorMessage: string = '';
@@ -55,10 +51,12 @@ export class RegisterPage {
 
     }
   }
-
-
-
-
+  ocultarContra() {
+    this.mostrarPassword = !this.mostrarPassword;
+  }
+  ocultarConfirmContra() {
+    this.mostrarConfirmPassword = !this.mostrarConfirmPassword;
+  }
   // async register() {
   //   try {
   //     const user = await this.authService.register(this.email, this.password);

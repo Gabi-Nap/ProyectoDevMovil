@@ -1,36 +1,36 @@
-
 <ion-content [fullscreen]="true">
-  <div class="login-container">
+  <div class="contenedor">
+    <form (ngSubmit)="login()" class="formulario">
 
-    <div class="avatar">
-      <img src="../../assets/icon/avatar.png" alt="Icono_Persona">
-    </div>
-
-    <div class="formulario">
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_usuario.png" alt="usuario_icon">
-        <ion-input [(ngModel)]="email" type="email" placeholder="Usuario" ></ion-input>
+      <h1>Iniciar sesión</h1>
+      <ion-item class="items">
+        <ion-icon name="mail-outline" class="iconos"></ion-icon>
+        <ion-input [(ngModel)]="email" name="email" type="email" required placeholder="Ingrese su mail"></ion-input>
       </ion-item>
 
-      <ion-item class="orden_input">
-        <img src="../../assets/icon//icono_candado.png" alt="icono_candado">
-        <ion-input [type]="mostrarPassword ? 'text' : 'password'" placeholder="Password" [(ngModel)]="password"
-          type="password" ></ion-input>
+      <ion-item class="items">
+        <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
+        <ion-input name="password" [type]="mostrarPassword ? 'text' : 'password'" type="password" [(ngModel)]="password"
+          required placeholder="Ingrese su contraseña">
+        </ion-input>
         <button type="button" class="ojo" (click)="ocultarContra()">
-          <img class="ojo_ocultar" src="../../assets/icon/icono_ocultar.png" alt="ojo_ocultar">
+          <ion-icon [name]="mostrarPassword ? 'eye-outline':'eye-off-outline'" class="iconos"> </ion-icon>
         </button>
       </ion-item>
-      <a class="texto_olvidar_contra" href="/tabs/register">
-        <p>¿No tienes una cuenta aun? ¡Registrate!</p>
-      </a>
-      <ion-button expand="block" (click)="login()">Login</ion-button>
-      <!-- <ion-button expand="block" (click)="sesionCerrada()">cerrar sesion</ion-button>
-            <ion-button expand="block" (click)="verConsola()">ver Csonsola</ion-button> -->
-      <ion-text color="danger" *ngIf="errorMessage">
-        <p class="ion-padding">{{ errorMessage }}</p>
-      </ion-text>
-    </div>
 
-    <!-- <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button> -->
+      <ion-button expand="block" type="submit" (click)="login()" class="login">Ingresar</ion-button>
+
+      <ion-text color="danger" *ngIf="errorMessage">
+        <p class="text-error">{{ errorMessage }}</p>
+      </ion-text>
+
+      <!-- <ion-button expand="block" (click)="sesionCerrada()">cerrar sesion</ion-button>
+      <ion-button expand="block" (click)="verConsola()">ver Csonsola</ion-button> -->
+      <!-- <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button> -->
+      <div class="register">
+        <p>¿No tienes una cuenta?</p>
+        <button type="button" [routerLink]="['/register']">Regístrate</button>
+      </div>
+    </form>
   </div>
 </ion-content>

@@ -1,46 +1,55 @@
 <ion-content [fullscreen]="true">
+  <div class="contenedor">
+    <form class="formulario">
+      <h1>Registro</h1>
 
-
-
-  <div class="login-container">
-
-    <div class="avatar">
-      <img src="../../assets/icon/avatar.png" alt="Icono_Persona">
-    </div>
-    <div class="formulario">
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_usuario.png" alt="nombre_icon">
-        <ion-input placeholder="Nombre..." [(ngModel)]="nombre" type="text"></ion-input>
+      <ion-item class="items">
+        <ion-icon name="person-outline" class="iconos"></ion-icon>
+        <ion-input placeholder="Ingrese su nombre" [(ngModel)]="nombre" type="nickname" name="nombre"></ion-input>
       </ion-item>
 
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_usuario.png" alt="apellido_icon">
-        <ion-input placeholder="Nacionalidad" [(ngModel)]="nacionalidad" type="text"></ion-input>
+      <ion-item class="items">
+        <ion-icon name="location-outline" class="iconos"></ion-icon>
+        <ion-input placeholder="Ingrese su nacionalidad" [(ngModel)]="nacionalidad" type="text" name="nacionalidad"></ion-input>
       </ion-item>
 
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_gmail.png" alt="usuario_icon">
-        <ion-input [(ngModel)]="email" placeholder="Correo electrónico" type="email"></ion-input>
+      <ion-item class="items">
+        <ion-icon name="mail-outline" class="iconos"></ion-icon>
+        <ion-input [(ngModel)]="email" name="email" type="email" required placeholder="Ingrese su mail"></ion-input>
       </ion-item>
 
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_candado.png" alt="icono_candado">
-        <ion-input [(ngModel)]="password" placeholder="Contraseña" type="password" required></ion-input>
-      </ion-item>
-
-      <ion-item class="orden_input">
-        <img src="../../assets/icon/icono_candado.png" alt="icono_candado">
-        <ion-input placeholder="Verificar contraseña" [(ngModel)]="confirmPassword" type="password" required>
+      <ion-item class="items">
+        <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
+        <ion-input name="password" [type]="mostrarPassword ? 'text' : 'password'" type="password" [(ngModel)]="password"
+          required placeholder="Ingrese su contraseña">
         </ion-input>
-      </ion-item>
-      <a class="texto_tener_login" href="/tabs/login">
-        <p>¿Ya tienes una cuenta? ¡Inicia sesion!</p>
-      </a>
 
-      <ion-button expand="block" color="secondary" (click)="register()">Registro</ion-button>
+        <button type="button" class="ojo" (click)="ocultarContra()">
+          <ion-icon [name]="mostrarPassword ? 'eye-outline':'eye-off-outline'" class="iconos"> </ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-item class="items">
+        <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
+        <ion-input name="confirmPassword" [type]="mostrarConfirmPassword ? 'text' : 'password'" type="password"
+          [(ngModel)]="confirmPassword" required placeholder="Verifique su contraseña">
+        </ion-input>
+
+        <button type="button" class="ojo" (click)="ocultarConfirmContra()">
+          <ion-icon [name]="mostrarConfirmPassword ? 'eye-outline':'eye-off-outline'" class="iconos"> </ion-icon>
+        </button>
+      </ion-item>
+
+      <ion-button expand="block" type="submit" (click)="register()" class="register">Registrarse</ion-button>
+      
       <ion-text color="danger" *ngIf="errorMessage">
         <p>{{ errorMessage }}</p>
       </ion-text>
-    </div>
+
+      <div class="login">
+        <p>¿Ya tienes una cuenta?</p>
+        <button type="button" [routerLink]="['/login']">Inicia sesion</button>
+      </div>
+    </form>
   </div>
 </ion-content>

@@ -23,7 +23,7 @@ export class Tab3Page implements OnInit {
   uid: string = '';
   nacionalidad: any = '';
   datos: any[] = [];
-  constructor(private auth: Auth, private authService: AuthService,private router:Router) {
+  constructor(private auth: Auth, private authService: AuthService, private router: Router) {
   }
 
   cerrarSesion() {
@@ -37,7 +37,7 @@ export class Tab3Page implements OnInit {
         email: user.email,
         uid: user.uid
       };
-       this.datos.push(datosUsuario);
+      this.datos.push(datosUsuario);
       console.log(this.datos)
       console.log('Datos guardados:', this.datos);
     } else {
@@ -48,7 +48,7 @@ export class Tab3Page implements OnInit {
   ngOnInit() {
     this.apretarEstado()
   }
-  irAFavoritos(){
+  irAFavoritos() {
     this.router.navigate(['/tabs/favoritos'])
   }
 

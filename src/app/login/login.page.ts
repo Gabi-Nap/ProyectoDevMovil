@@ -4,7 +4,7 @@ import { getAuth, onAuthStateChanged, signInWithEmailAndPassword } from "firebas
 import { environment } from '../../environments/environment'
 import { initializeApp } from 'firebase/app';
 import { AuthService } from '../auth/authService'
-import { Auth} from '@angular/fire/auth'
+import { Auth } from '@angular/fire/auth'
 
 @Component({
   selector: 'app-login',
@@ -14,17 +14,19 @@ import { Auth} from '@angular/fire/auth'
 })
 export class LoginPage {
 
-  email :string= '';
-  password :string= '';
+  email: string = '';
+  password: string = '';
   mostrarPassword: boolean = false;
   errorMessage: string = '';
-  constructor(private router: Router, private authService: AuthService,private auth:Auth) { }
+  constructor(private router: Router, private authService: AuthService, private auth: Auth) { }
 
   async login() {
     try {
-     await this.authService.login(this.email,this.password);
-     console.log(this.authService.usuarioCredencial.user)
-    } catch (error:any) {      
+      await this.authService.login(this.email, this.password);
+      console.log(this.authService.usuarioCredencial.user);
+      console.log('sesion iniciada');
+      this.router.navigate(['/tabs/tab1']);
+    } catch (error: any) {
       this.errorMessage = 'Email o contraseña incorrectos';
       console.log('error de conexion')
     }
@@ -34,13 +36,13 @@ export class LoginPage {
     console.log('sesion cerrada');
   }
   verConsola() {
-    const auth:any = this.authService;
+    const auth: any = this.authService;
     onAuthStateChanged(auth, (user) => {
       if (user) {
-      
+
         const uid = user.uid;
         console.log(uid)
-        
+
       } else {
         console.log('el usuario se deslogueo')
         // User is signed out
@@ -52,6 +54,4 @@ export class LoginPage {
   ocultarContra() {
     this.mostrarPassword = !this.mostrarPassword;
   }
-
-
 }
