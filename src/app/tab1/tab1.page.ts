@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { JuegosService } from '../services/juegos'; 
-import { Juego } from '../services/juegos'; 
+import { JuegosService } from '../services/juegos';
+import { Juego } from '../services/juegos';
 import { AuthService } from '../auth/authService';
 import { Router } from '@angular/router';
 
@@ -11,66 +11,88 @@ import { Router } from '@angular/router';
   standalone: false,
 })
 export class Tab1Page implements OnInit {
+  juegos: Juego[] = [];
+  isLoading: boolean = true;
 
-  juegos: Juego[] = []; 
-  isLoading: boolean = true; 
-  
-  // ⭐️ Variable para rastrear qué chip está seleccionado (usado para el color en HTML)
   filtroActivo: string = 'Todos';
 
-  // ⭐️ Lista de chips: 'nombre' es para mostrar, 'slug' es para la API de RAWG
   categorias = [
-    { nombre: 'Todos', slug: '' }, // Slug vacío para no filtrar
+    { nombre: 'Todos', slug: '' },
     { nombre: 'Acción', slug: 'action' },
     { nombre: 'Aventura', slug: 'adventure' },
     { nombre: 'RPG', slug: 'role-playing-games' },
     { nombre: 'Deportes', slug: 'sports' },
     { nombre: 'Estrategia', slug: 'strategy' },
-    { nombre: 'Shooter', slug: 'shooter' }
+    { nombre: 'Shooter', slug: 'shooter' },
   ];
 
-  // Inyectamos el JuegosService
-  constructor(private juegosService: JuegosService,private authService:AuthService,private router:Router) {}
+  /**
+   * @constructor
+   * @description
+   * Inyecta los servicios necesarios para obtener los juegos desde la API, manejar la autenticación y controlar la navegación.
+   *
+   * @param {JuegosService} juegosService - Servicio encargado de realizar las peticiones HTTP para obtener los juegos.
+   * @param {AuthService} authService - Servicio de autenticación de usuarios.
+   * @param {Router} router - Servicio de enrutamiento para navegar entre páginas.
+   */
 
-  // Se ejecuta una vez que el componente se inicializa
+  constructor(
+    private juegosService: JuegosService,
+    private authService: AuthService,
+    private router: Router
+  ) {}
+
   ngOnInit() {
-    // Carga inicial sin filtro
-    this.cargarJuegos(); 
+    this.cargarJuegos();
   }
 
   /**
-   * Maneja el click en un chip de categoría.
-   * Llama a cargarJuegos con el slug del filtro.
+   * @function filtrarPorCategoria
+   * @description
+   * Cambia el filtro activo según la categoría seleccionada por el usuario y recarga la lista de juegos
+   * utilizando el slug correspondiente.
+   *
+   * @param {string} slug - Identificador de la categoría utilizado por la API.
+   * @param {string} nombre - Nombre visible de la categoría seleccionada.
+   * @return {void}
    */
+
   filtrarPorCategoria(slug: string, nombre: string) {
-    // 1. Marca el chip como activo
-    this.filtroActivo = nombre; 
-    
-    // 2. Llama a la función de carga con el nuevo filtro
+    this.filtroActivo = nombre;
+
     this.cargarJuegos(slug);
   }
 
   /**
-   * Carga los juegos, ahora con un parámetro opcional de género.
-   * @param generoSlug El slug del género a filtrar. Por defecto es vacío ('').
+   * @function cargarJuegos
+   * @description
+   * Carga los juegos desde la API según la categoría seleccionada (si se pasa un `slug`),
+   * o carga todos los juegos por defecto.
+   * Muestra el estado de carga mientras espera la respuesta de la API.
+   *
+   * @param {string} [generoSlug=''] - Slug del género para filtrar los juegos (opcional).
+   * @return {void}
    */
-  cargarJuegos(generoSlug: string = ''){
+
+  cargarJuegos(generoSlug: string = '') {
     this.isLoading = true;
-    
-    // ⭐️ Pasamos el slug de género al servicio
+
     this.juegosService.getJuegosPopulares(generoSlug).subscribe({
       next: (Response) => {
         this.juegos = Response.results;
-        console.log(`Juegos cargados para ${generoSlug || 'Todos'}:`, this.juegos.length);
+        console.log(
+          `Juegos cargados para ${generoSlug || 'Todos'}:`,
+          this.juegos.length
+        );
       },
       error: (err) => {
-        console.error("Error al cargar los juegos desde la API:", err);
-        this.juegos = []; // Vaciar la lista si hay error
-        this.isLoading = false; 
+        console.error('Error al cargar los juegos desde la API:', err);
+        this.juegos = [];
+        this.isLoading = false;
       },
       complete: () => {
-        this.isLoading = false; 
-      }
+        this.isLoading = false;
+      },
     });
   }
 }
