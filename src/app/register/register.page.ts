@@ -2,9 +2,6 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-
-
-
 import { doc, getFirestore, setDoc } from 'firebase/firestore';
 import { environment } from '../../environments/environment'
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth'
@@ -36,12 +33,62 @@ export class RegisterPage {
   sexo: string = '';
   errorMessage: string = '';
   // ---------------
-  async register() {
-    
+  //Validar antes de registrar
+  validarRegister() {
+    //Limpiar mensajes de error anteriores
+    this.errorMessage = '';
+
+    //Validar nombre de usuario
+    if (!this.nombreUsuario) {
+      this.errorMessage = 'El nombre de usuario es requerido';
+      return;
+    }
+
+    //Validar nacionalidad ------------------ cambiar this.sexo despues
+    if (!this.sexo) {
+      this.errorMessage = 'La nacionalidad es requerida';
+      return;
+    }
+
+    //Validar email
+    if (!this.email) {
+      this.errorMessage = 'El email es requerido';
+      return;
+    }
+
+    //Validar formato de email
+    if (!this.email.includes('@') || !this.email.includes('.')) {
+      this.errorMessage = 'Ingresa un email válido (debe tener @ y .)';
+      return;
+    }
+
+    //Validar contraseña
+    if (!this.password) {
+      this.errorMessage = 'La contraseña es requerida';
+      return;
+    }
+
+    //Validar longitud de contraseña
+    if (this.password.length < 6) {
+      this.errorMessage = 'La contraseña debe tener al menos 6 caracteres';
+      return;
+    }
+
+    //Validar confirmación de contraseña
+    if (!this.confirmPassword) {
+      this.errorMessage = 'Confirma tu contraseña';
+      return;
+    }
+
     if (this.password !== this.confirmPassword) {
       this.errorMessage = 'Las contraseñas no coinciden';
       return;
     }
+
+    //Hacer register
+    this.register();
+  }
+  async register() {
     try {
       const credencialUsuario = await createUserWithEmailAndPassword(this.auth, this.email, this.password);//Aca crearemos un usuario agarrando el correo y la contraseña
       const uid = credencialUsuario.user.uid;
@@ -59,7 +106,12 @@ export class RegisterPage {
       this.router.navigate(['/login'])
       
     } catch (error: any) {
-      this.errorMessage = error.message;
+      if (error.code==='auth/email-already-in-use') {
+        this.errorMessage = 'Este email ya está en uso';
+      }
+      else{
+        this.errorMessage = 'Error al registrar. Intenta nuevamente.';
+      }
       console.log('no se pudo registrar');
     }
   }

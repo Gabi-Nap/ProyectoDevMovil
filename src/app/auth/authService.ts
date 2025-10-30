@@ -41,7 +41,7 @@ export class AuthService {
   }
   // -------------------------------------------------------
   //Esta funcion boton servira para guardar los juegos que añadamos a favoritos
-  async agregarFavoritos(idDelJuego: string, nombreJuego: string) {
+  /*async agregarFavoritos(idDelJuego: string, nombreJuego: string) {
     const user = this.auth.currentUser;
     if (!user) {
       console.log('Usuario no logueado');
@@ -76,7 +76,48 @@ export class AuthService {
       console.log('📄 Documento de favoritos creado y juego agregado');
     }
   }
+*/
+async agregarFavoritos(juego: any) {
+  const user = this.auth.currentUser;
+  if (!user) {
+    console.log('Usuario no logueado');
+    return;
+  }
 
+  const refUsuario = doc(this.firestore, "favoritos", user.uid);
+
+  // Crear objeto completo del juego
+  const juegoCompleto = {
+    id: juego.id,
+    nombre: juego.name || juego.nombre,
+    background_image: juego.background_image,
+    rating: juego.rating,
+    released: juego.released
+  };
+
+  const docSnap = await getDoc(refUsuario);
+
+  if (docSnap.exists()) {
+    const datos = docSnap.data();
+    const juegos = datos['juegos'] || [];
+
+    const yaExiste = juegos.some((j: any) => j.id === juegoCompleto.id);
+    if (yaExiste) {
+      console.log('⚠️ El juego ya está en favoritos');
+      return;
+    }
+
+    await updateDoc(refUsuario, {
+      juegos: arrayUnion(juegoCompleto),
+    });
+    console.log(`✅ Juego "${juegoCompleto.nombre}" agregado a favoritos`);
+  } else {
+    await setDoc(refUsuario, {
+      juegos: [juegoCompleto],
+    });
+    console.log('📄 Documento de favoritos creado y juego agregado');
+  }
+}
 
   //funcion para subir comentario al firestore y storage para almacenarlo y llamarlo luego
   async subirComentario(juegoId: string, comentario: string, imagen: File | null) {

@@ -70,10 +70,18 @@ export class Tab4Page implements OnInit {
     this.cargando = false;
   }
   //funcion de boton para agregar a favoritos los juegos que deseemos
-  agregarFavoritos(idDelJuego: string, nombreJuego: string) {
+  /*agregarFavoritos(idDelJuego: string, nombreJuego: string) {
     //Aca usaremos la funcion que detallaremos en el authService.....
     this.authService.agregarFavoritos(idDelJuego, nombreJuego)
+  }*/
+
+  agregarAFavoritos() {
+  if (!this.juego) {
+    console.log('No hay datos del juego');
+    return;
   }
+  this.authService.agregarFavoritos(this.juego);
+}
 }
 
 

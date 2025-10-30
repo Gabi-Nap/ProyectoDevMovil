@@ -1,8 +1,24 @@
-.fondo-favoritos {
+/*.fondo-favoritos {
   --background: linear-gradient(180deg, #a87bcf 0%, #6f38dd 100%);
   color: #fff;
   text-align: center;
   padding: 10px;
+}
+.sin-favoritos {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ddd;
+  font-size: 1.1em;
+  p{
+    margin-bottom: 0;
+  }
+  ion-icon {
+    font-size: 4em;
+    color: #ddd;
+    margin-bottom: 10px;
+  }
 }
 
 .favorito-card {
@@ -23,20 +39,7 @@
   object-fit: cover;
 }
 
-.sin-favoritos {
-  margin-top: 50%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #ddd;
-  font-size: 1.1em;
-}
 
-.icono-vacio {
-  font-size: 4em;
-  color: #a78bfa;
-  margin-bottom: 10px;
-}
 .titulo{
   color: whitesmoke;;
   
@@ -48,4 +51,174 @@
   position: absolute;
   right: -10px;
   top: -10px;
+}*/
+
+
+
+
+
+/*.fondo-favoritos {
+  //--background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  //color: #fff;
+  //padding: 16px;
+}*/
+
+.sin-favoritos {
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #ddd;
+  font-size: 1.1em;
+  p{
+    margin-bottom: 0;
+  }
+  ion-icon {
+    font-size: 4em;
+    color: #ddd;
+    margin-bottom: 10px;
+  }
+}
+
+.contenedor-favoritos {
+  //max-width: 1200px;
+  //margin: 0 auto;
+  .titulo {
+    text-align: center;
+    font-size: 2em;
+    //font-weight: bold;
+    margin-bottom: 8px;
+    color: white;
+    //text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .subtitulo {
+    text-align: center;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 24px;
+    font-size: 1em;
+  }
+}
+
+
+.favorito-card {
+  background: rgba(255, 255, 255, 0.1);
+  
+  backdrop-filter: blur(10px);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 8px 32px rgba(105, 105, 105, 0.3);
+  overflow: hidden;
+  transition: all 0.3s ease;
+  margin-bottom: 16px;
+  height: 100%;
+  
+  &:hover {
+    transform: translateY(-4px);
+    //box-shadow: 0 12px 40px rgba(100, 100, 100, 0.4);
+    background:linear-gradient(135deg, #667eea46 0%, #764ba250 100%);
+  }
+}
+.imagen-juego {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  //display: block;
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  .favorito-card:hover & {
+    transform: scale(1.05);
+  }
+}
+
+
+
+
+ion-card-header {
+  padding: 16px;
+}
+
+.nombre-juego {
+  font-size: 1.1em;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 12px;
+  //line-height: 1.3;
+  //display: -webkit-box;
+  
+  //-webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.info-juego {
+  display: flex;
+  justify-content: space-between; // ← NUEVO
+  align-items: center; // ← NUEVO
+  margin-bottom: 12px;
+  
+  
+  ion-badge {
+    font-weight: 500;
+    
+    ion-icon {
+      font-size: 0.8em;
+      margin-right: 4px;
+    }
+  }
+  .fecha-lanzamiento {
+    font-size: 0.9em;
+    margin: 0;
+    opacity: 0.8;
+    text-align: right; // ← NUEVO
+    color: white;
+  }
+}
+
+
+ion-card-content {
+  padding: 0 16px 16px 16px;
+}
+
+.boton-eliminar {
+  --border-radius: 12px;
+  font-weight: 500;
+  
+  ion-icon {
+    font-size: 1.1em;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .fondo-favoritos {
+    padding: 12px;
+  }
+  
+  .titulo {
+    font-size: 1.6em;
+  }
+  
+  .imagen-juego {
+    height: 160px;
+  }
+  
+  .nombre-juego {
+    font-size: 1em;
+  }
+}
+
+@media (max-width: 480px) {
+  .sin-favoritos {
+    ion-icon {
+      font-size: 3em;
+    }
+    
+    h2 {
+      font-size: 1.3em;
+    }
+  }
+  
+  .imagen-juego {
+    height: 140px;
+  }
 }

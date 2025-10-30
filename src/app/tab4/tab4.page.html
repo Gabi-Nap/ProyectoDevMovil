@@ -1,19 +1,16 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Presentación de juego</ion-title>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content class="comentarios-container" *ngIf="juego">
-  <ion-card>
-    <img [src]="juego.background_image">
+  <ion-card class="juego-card">
+    <img [src]="juego.background_image" class="juego-imagen">
     <ion-card-header>
       <ion-card-title class="espacio">{{ juego.name }}</ion-card-title><!--Nombre del juego-->
-      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name }}</ion-card-subtitle><!--nombre del desarrollador-->
-      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released }}</ion-card-subtitle><!--dato fecha de lanzamiento-->
+      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name
+        }}</ion-card-subtitle><!--nombre del desarrollador-->
+      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released ?? 'Fecha no disponible'
+        }}</ion-card-subtitle><!--dato fecha de lanzamiento-->
       <!-- ----------------------------- -->
-       <!--Boton para añadir a favoritos-->
-      <ion-button size="small" color="warning" (click)="agregarFavoritos(juego.id,juego.name)">
+      <!--Boton para añadir a favoritos-->
+      <ion-button size="small" color="warning" (click)="agregarAFavoritos()">
         <ion-icon slot="start" name="star"></ion-icon>
         Añadir a favoritos
       </ion-button>
@@ -32,49 +29,57 @@
     </ion-accordion-group>
   </ion-card>
   <!--Conjunto de imagenes del videojuego para presentar-->
-  <h2>Imagenes de {{juego.name}}</h2>
-  <p class="tituloImagenes">(Deslizar hacia derecha)</p>
+  <div class="seccion-imagenes">
 
-  <div class="scroll-container">
-    <div class="item" *ngFor="let img of listaJuegos">
-      <img [src]="img.image" />
+    <h2>Imagenes de {{juego.name}}</h2>
+    <p class="tituloImagenes">(Deslizar hacia derecha)</p>
+
+    <div class="scroll-container">
+      <div class="item" *ngFor="let img of listaJuegos">
+        <img [src]="img.image" />
+      </div>
     </div>
   </div>
-  <!-- ----------------seccion de comentarios del videojuego con formulario ---------------->   
- <div class="comentario-form">
-  <!-- textarea para poder escribir un comentario -->
-    <ion-textarea
-      [(ngModel)]="comentario"
-      placeholder="Deja tu comentario sobre este videojuego..."
-      rows="4"
-      autoGrow="true">
-    </ion-textarea>
-    <!-- ------------------------------ -->
-     <!--Esto es para el boton de "subir imagen"-->
-    <div class="upload-section">
-      <input type="file" (change)="seleccionarImagen($event)" accept="image/*" hidden #fileInput>
-      <ion-button fill="outline" color="medium" (click)="fileInput.click()">
-        Subir imagen
-      </ion-button>
-      <span *ngIf="imagenSeleccionada">{{ imagenSeleccionada.name }}</span>
-    </div>
-<!-- ----------------------- -->
-    <!-- codigo de boton para publicar en el sitio web sea foto con comentario, solo foto o solo comentario -->
-    <ion-button expand="block" color="primary" (click)="enviarComentario()" [disabled]="cargando">
-      {{ cargando ? 'Enviando...' : 'Publicar' }}
-    </ion-button>
-  </div>
-<!-- ------------------------------------------- -->
- <!-- Aca ira la seccion de comentarios que traeremos de firestore y storage mediante un ngFor al array donde los almacenamos-->
-  <ion-list class="comentarios-lista">
-    <ion-item *ngFor="let coment of comentarios" lines="none" class="comentario-item">      
-      <ion-label>
-        <h3 style="color: red;" class="nombre-usuario">{{ coment.nombreUsuario }}</h3> <!--nombre del usuario que comentara(autenticado) -->
-        <p class="comentario-texto">{{ coment.comentario }}</p> <!--Comentario de usuario-->
-        <img *ngIf="coment.imageUrl" [src]="coment.imageUrl" class="comentario-img" alt="comentario" /><!--imagen que publico el comentador-->
-        <p class="comentario-fecha">{{ coment.fecha?.toDate() | date:'short' }}</p><!--datos de fecha y hora de publicación-->
-      </ion-label>
-    </ion-item>
+  <!-- ----------------seccion de comentarios del videojuego con formulario ---------------->
+  <div class="seccion-comentarios">
+    <h2>Comentarios</h2>
+    <div class="comentario-form">
+      <!-- textarea para poder escribir un comentario -->
+      <ion-textarea [(ngModel)]="comentario" placeholder="Deja tu comentario sobre este videojuego..." rows="4"
+        autoGrow="true">
+      </ion-textarea>
+      <!-- ------------------------------ -->
+      <!--Esto es para el boton de "subir imagen"-->
+      <div class="upload-section">
+        <input type="file" (change)="seleccionarImagen($event)" accept="image/*" hidden #fileInput>
+        <span *ngIf="imagenSeleccionada">{{ imagenSeleccionada.name }}</span>
+        <ion-button fill="outline" (click)="fileInput.click()" class="upload-img">
+          Subir imagen
+        </ion-button>
 
-  </ion-list>
+
+        <ion-button expand="block" (click)="enviarComentario()" [disabled]="cargando" class="enviar">
+          {{ cargando ? 'Enviando...' : 'Publicar' }}
+        </ion-button>
+      </div>
+      <!-- ----------------------- -->
+      <!-- codigo de boton para publicar en el sitio web sea foto con comentario, solo foto o solo comentario -->
+    </div>
+    <!-- ------------------------------------------- -->
+    <!-- Aca ira la seccion de comentarios que traeremos de firestore y storage mediante un ngFor al array donde los almacenamos-->
+    <ion-list class="comentarios-lista">
+      <ion-item *ngFor="let coment of comentarios" lines="none" class="comentario-item">
+        <ion-label class="label">
+          <h3 class="nombre-usuario">{{ coment.nombreUsuario }}</h3>
+          <!--nombre del usuario que comentara(autenticado) -->
+          <p class="comentario-texto">{{ coment.comentario }}</p> <!--Comentario de usuario-->
+          <img *ngIf="coment.imageUrl" [src]="coment.imageUrl" class="comentario-img"
+            alt="comentario" /><!--imagen que publico el comentador-->
+          <p class="comentario-fecha">{{ coment.fecha?.toDate() | date:'short' }}</p>
+          <!--datos de fecha y hora de publicación-->
+        </ion-label>
+      </ion-item>
+
+    </ion-list>
+  </div>
 </ion-content>

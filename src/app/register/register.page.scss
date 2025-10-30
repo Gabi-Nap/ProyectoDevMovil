@@ -84,15 +84,15 @@ ion-title{
 .contenedor {
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100%;
+  align-items: flex-start;
+  min-height: 100%;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); //buscar degradado de la tab1
-  padding: 20px;
+  padding: 40px 20px 20px 20px; // Más padding arriba
 }
 
 .formulario {
   background-color: #ffffff;
-  padding: 30px;
+  padding: 25px;
   border-radius: 12px;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -100,34 +100,23 @@ ion-title{
 
   h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 25px; 
     color: #757575;
     font-size: 1.8rem;
     font-weight: 600;
   }
 }
-
-.subtitle {
-  display: flex;
-
-  ion-icon {
-    margin-right: 8px;
-    color: #3333336b;
-  }
-
-  p {
-    font-size: 1rem;
-    color: #333333cb;
-    margin: 0;
-  }
+.keyboard-open .contenedor {
+  padding-top: 20px; // Menos padding cuando hay teclado
 }
 
+
 .items {
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   --padding-start: 0;
   --background: #ffffff;
   color: #333333cb;
-  --min-height: 35px !important;
+  //--min-height: 35px !important;
   //min-height: 35px !important;
   //--padding-top: 0 !important;
   //--padding-bottom: 0 !important;
@@ -175,6 +164,7 @@ ion-title{
   color: #ffffff;
   transition: all 0.3s ease;
   font-size: 1rem;
+   margin-top: 10px;
 }
 
 .register:hover {
@@ -183,7 +173,7 @@ ion-title{
 }
 
 .login {
-  margin-top: 30px;
+    margin-top: 20px; // Reducido
   text-align: center;
 
   p {
@@ -212,7 +202,7 @@ ion-title{
   }
 }
 
-.select-genero {
+/*.select-genero {
   width: 100%;
 
   .genero {
@@ -235,7 +225,7 @@ ion-title{
     color: #666;
     //pointer-events: none;
   }
-}
+}*/
 
 .text-error {
   padding: 0px;

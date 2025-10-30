@@ -5,7 +5,7 @@
 
       <ion-item class="items">
         <ion-icon name="person-outline" class="iconos"></ion-icon>
-        <ion-input placeholder="Nombre de usuario" [(ngModel)]="nombreUsuario" name="nombre" type="nickname"
+        <ion-input placeholder="Nombre de usuario" [(ngModel)]="nombreUsuario" name="nombre" type="text"
           required></ion-input>
       </ion-item>
       <!-- ------------------->
@@ -52,7 +52,7 @@
       </ion-text>
 
 
-      <ion-button expand="block" type="submit" (click)="register()" class="register">Registrarse</ion-button>
+      <ion-button expand="block" type="button" (click)="validarRegister()" class="register">Registrarse</ion-button>
 
       <div class="login">
         <p>¿Ya tienes una cuenta?</p>

@@ -1,45 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="dark">
-    <ion-title>Mis Favoritos</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-content class="fondo-favoritos">
+<ion-content class="fondo-favoritos" [fullscreen]="true">
 
   <!-- Si no hay favoritos -->
   <div *ngIf="listaFavoritos.length === 0" class="sin-favoritos">
-    <ion-icon name="heart-dislike-outline" class="icono-vacio"></ion-icon>
-    <p>No hay ninguna lista de favoritos aca,<br>¡Añade un juego!</p>
+    <ion-icon name="heart-dislike-outline"></ion-icon>
+    <h2>No tienes juegos favoritos</h2>
+    <p>¡Explora y añade tus juegos favoritos!</p>
   </div>
 
-
-
-
-
-
-
-
-
-
   <!-- Lista de favoritos -->
-  <ion-grid *ngIf="listaFavoritos.length > 0">
-    <ion-row>
-      <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let juego of listaFavoritos">
-        <ion-card class="favorito-card">
-          <ion-card-header>
+  <div *ngIf="listaFavoritos.length > 0" class="contenedor-favoritos">
+    <h2 class="titulo">Tus Juegos Favoritos</h2>
+    <p class="subtitulo">{{ listaFavoritos.length }} juego(s) guardado(s)</p>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col size="6" size-md="6" size-lg="4" *ngFor="let juego of listaFavoritos">
+          <ion-card class="favorito-card">
+            <!-- Imagen del juego -->
             <div class="contenido_sup">
-              <ion-card-title>{{ juego.id }}</ion-card-title>
-              <ion-button [routerLink]="['/tabs/tab4',juego.id]" class="boton_inf">ir hacia juego</ion-button>
+              <img [src]="juego.background_image" [alt]="juego.nombre" class="imagen-juego" [routerLink]="['/tabs/tab4', juego.id]">
             </div>
-            <ion-card-title>{{juego.nombre}}</ion-card-title>
-            <ion-button color="light" fill="outline" (click)="eliminarFavorito(juego.id)">
-              <ion-icon name="trash-outline" slot="start"></ion-icon>
-              Eliminar de favoritos
-            </ion-button>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+
+            <!-- Contenido de la tarjeta -->
+            <ion-card-header>
+              <ion-card-title class="nombre-juego">{{ juego.nombre }}</ion-card-title>
+
+              <!-- Información adicional -->
+              <div class="info-juego" *ngIf="juego.rating || juego.released">
+                <ion-text color="light" *ngIf="juego.released">
+                <p class="fecha-lanzamiento">Lanzamiento: {{ juego.released ?? 'Fecha no disponible' }}</p>
+                </ion-text>
+                <ion-badge color="warning" *ngIf="juego.rating">
+                  <ion-icon name="star" slot="start"></ion-icon>
+                  {{ juego.rating }}/5
+                </ion-badge>
+              </div>
+            </ion-card-header>
+
+            <!-- Botón eliminar -->
+            <ion-card-content>
+              <ion-button expand="block" color="danger" fill="outline" (click)="eliminarFavorito(juego.id)"
+                class="boton-eliminar">
+                <ion-icon name="trash-outline" slot="start"></ion-icon>
+                Eliminar
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 
 </ion-content>

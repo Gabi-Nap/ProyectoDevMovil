@@ -1,13 +1,12 @@
 <ion-content [fullscreen]="true">
   <div class="contenedor">
-    <form class="formulario">
+    <form class="formulario" novalidate>
       <h1>Iniciar sesión</h1>
 
       <ion-item class="items">
         <ion-icon name="mail-outline" class="iconos"></ion-icon>
         <ion-input [(ngModel)]="email" name="email" type="email" required placeholder="Ingrese su mail"></ion-input>
       </ion-item>
-
       <ion-item class="items">
         <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
         <ion-input name="password" [type]="mostrarPassword ? 'text' : 'password'" type="password" [(ngModel)]="password"
@@ -22,12 +21,13 @@
       </ion-text>
 
 
-      <ion-button expand="block" type="submit" (click)="login()" class="login">Ingresar</ion-button>
+      <ion-button expand="block" type="button" (click)="validarLogin()" class="login">Ingresar</ion-button>
 
       <div class="register">
         <p>¿No tienes una cuenta?</p>
         <button routerLink="/register">Regístrate</button>
       </div>
     </form>
+    
   </div>
 </ion-content>
