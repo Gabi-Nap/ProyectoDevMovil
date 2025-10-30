@@ -15,7 +15,24 @@
     <h1 class="text-2xl font-bold text-gray-800">¡Bienvenido a GamePage!</h1>
     <p class="text-sm text-gray-600">Descubre Post's de Videojuegos</p>
   </div>
-
+  <div class="categorias p-4 mt-6">
+    <h2 class="text-xl font-bold mb-3">Categorías Populares</h2>
+    <div class="lista-categorias flex flex-wrap gap-2">
+      
+      <!-- ⭐️ Iteramos sobre la lista 'categorias' del componente (Tab1Page) -->
+       <!-- ⭐️ EVENTO CLICK: Llama a la función del componente con el slug y el nombre -->
+        <!-- ⭐️ ESTILO DINÁMICO: Si el filtro activo coincide con el nombre del chip, se pone color 'primary' -->
+      <ion-chip 
+        *ngFor="let cat of categorias"
+        (click)="filtrarPorCategoria(cat.slug, cat.nombre)"
+        [color]="filtroActivo === cat.nombre ? 'primary' : 'light'"
+        class="cursor-pointer"
+      >
+        {{ cat.nombre }}
+      </ion-chip>
+      
+    </div>
+  </div>
   <!-- INDICADOR DE CARGA -->
   <!-- Solo se muestra si isLoading es true (mientras se espera la API) -->
   <div *ngIf="isLoading" class="flex justify-center items-center h-48">
@@ -37,7 +54,7 @@
     <!-- Iteramos sobre el array 'juegos' obtenido de la API -->
     <!-- RouterLink agregado para redirigir a otro tabs de acuerdo al id del juego-->
     <ion-card *ngFor="let juego of juegos" class="juegos-card shadow-lg rounded-lg overflow-hidden"
-      [routerLink]="['/tabs/tab4',juego.id]">
+      [routerLink]="['/apps/juego',juego.id]">
       <!-- La imagen ahora viene de la propiedad background_image -->
       <img [src]="juego.background_image" [alt]="'Imagen de fondo de ' + juego.name" class="w-full h-48 object-cover" />
 
@@ -60,21 +77,7 @@
 
   </div>
 
-  <!-- ⭐️ SECCIÓN DE CATEGORÍAS (DINÁMICA Y CON INTERACCIÓN) -->
-  <div class="categorias p-4 mt-6">
-    <h2 class="text-xl font-bold mb-3">Categorías Populares</h2>
-    <div class="lista-categorias flex flex-wrap gap-2">
-
-      <!-- ⭐️ Iteramos sobre la lista 'categorias' del componente (Tab1Page) -->
-      <!-- ⭐️ EVENTO CLICK: Llama a la función del componente con el slug y el nombre -->
-      <!-- ⭐️ ESTILO DINÁMICO: Si el filtro activo coincide con el nombre del chip, se pone color 'primary' -->
-      <ion-chip *ngFor="let cat of categorias" (click)="filtrarPorCategoria(cat.slug, cat.nombre)"
-        [color]="filtroActivo === cat.nombre ? 'primary' : 'medium'" class="cursor-pointer">
-        {{ cat.nombre }}
-      </ion-chip>
-
-    </div>
-  </div>
+  
 </ion-content>
 
 

@@ -1,68 +1,89 @@
 <ion-content [fullscreen]="true">
   <div class="contenedor">
-    <form (ngSubmit)="register()" class="formulario">
+    <form #formulario="ngForm" (ngSubmit)="register()" class="formulario" novalidate>
       <h1>Registro</h1>
-
-
+      <!-- -----------Nombre completo------------------------- -->
+      <div class="subtitle">
+        <ion-icon name="person-outline" class="iconos"></ion-icon>
+        <p>Nombre completo:</p>
+      </div>
+      <ion-item class="items">
+        <ion-input placeholder="*Nombre completo" [(ngModel)]="nombreCompleto" name="nombreCompleto" type="nickname"
+          #nombreCompletoInput="ngModel" required></ion-input>
+      </ion-item>
+      <ion-text color="danger" *ngIf="nombreCompletoInput.invalid && nombreCompletoInput.touched">
+        <p *ngIf="nombreCompletoInput.errors?.['required']">El nombre de usuario es obligatorio</p>
+      </ion-text>
+      <!-- ---------------------------------------------------- -->
+      <!-- -----------Nombre usuario------------------------- -->
       <div class="subtitle">
         <ion-icon name="person-outline" class="iconos"></ion-icon>
         <p>Nombre de usuario:</p>
       </div>
       <ion-item class="items">
-        <ion-input placeholder="usuario" [(ngModel)]="nombreUsuario" name="nombre" type="nickname" required></ion-input>
+        <ion-input placeholder="*Nombre del usuario" [(ngModel)]="nombreUsuario" name="nombreUsuario" type="nickname"
+          #nombreUsuarioInput="ngModel" required></ion-input>
       </ion-item>
-      <!-- ------------------->
-
-      <!-- genero -->
+      <ion-text color="danger" *ngIf="nombreUsuarioInput.invalid && nombreUsuarioInput.touched">
+        <p *ngIf="nombreUsuarioInput.errors?.['required']">El nombre de usuario es obligatorio</p>
+      </ion-text>
+      <!-- ------------------------------------------------------>
+       <!-- -----------------Nacionalidad------------------------- -->
       <div class="subtitle">
         <ion-icon name="mail-outline" class="iconos"></ion-icon>
-        <p>Genero:</p>
+        <p>Nacionalidad:</p>
       </div>
       <ion-item class="items">
-        <ion-input placeholder="*Genero" [(ngModel)]="sexo" name="sexo" type="text" required></ion-input>
+        <ion-input placeholder="*Nacionalidad..." [(ngModel)]="nacionalidad" name="nacionalidad" type="text"
+          required></ion-input>
       </ion-item>
-
-      <!-- --------------------- -->
+      <!-- ---------------------------------------------------------------- -->
+      <!-- -------------------------correo electronico------------------------------->
       <div class="subtitle">
         <ion-icon name="mail-outline" class="iconos"></ion-icon>
         <p>Email:</p>
       </div>
       <ion-item class="items">
-        <ion-input placeholder="*email" [(ngModel)]="email" name="email" type="email" required></ion-input>
+        <ion-input placeholder="*correo electronico" [(ngModel)]="email" name="email" type="email" #emailInput="ngModel"
+          required>
+        </ion-input>
       </ion-item>
-
-      <!-- ------------------- -->
+      <!-- texto por si el email esta incompleto -->
+      <ion-text color="danger" *ngIf="emailInput.touched && emailInput.invalid">
+        <p *ngIf="emailInput.errors?.['required']">El correo es obligatorio</p>
+      </ion-text>
+      <!-- --------------------------------------------------------------------------- -->
+      <!-- ------------------------------Contraseña---------------------------------->
       <div class="subtitle">
         <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
         <p>Contraseña:</p>
       </div>
       <ion-item class="items">
-        <ion-input [(ngModel)]="password" name="password" type="password" required
-          placeholder="Más de 6 carácteres"></ion-input>
+        <ion-input [(ngModel)]="password" name="password" type="password" required placeholder="Más de 6 carácteres"
+          #passwordInput="ngModel"></ion-input>
       </ion-item>
-      <!-- --------------------- -->
-
+      <ion-text color="danger" *ngIf="passwordInput.invalid && passwordInput.touched">
+        <p *ngIf="passwordInput.errors?.['required']">La contraseña es obligatoria</p>
+      </ion-text>
+      <!-- -------------------------------------------------------------------------------->
+       <!-- -------------------------Contraseña confirmar---------------------------------- -->
       <div class="subtitle">
-        <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
+        <ion-icon name="lock-closed-outline" class="iconos" ></ion-icon>
         <p>Contraseña:</p>
       </div>
       <ion-item class="items">
         <ion-input [(ngModel)]="confirmPassword" name="confirmPassword" type="password" required
-          placeholder="Más de 6 carácteres"></ion-input>
-      </ion-item>
-
-
-
+          placeholder="Confirmar contraseña" #confirmPasswordInput="ngModel"></ion-input>
+      </ion-item>  
+      <!-- -------------------------------------------------------------------------------------->
+       <!-- -------------------------------boton para registrarse------------------------------------ -->
       <div class="register">
-        <p>¿Ya tienes una cuenta?</p>
+        <p style="color: black;">¿Ya tienes una cuenta?</p>
         <button routerLink="/login">Inicia sesión</button>
       </div>
       <div class="register">
-        <button type="submit" expand="block" style="width: 300px; height: 50px;" color="secondary">Registrarse</button>
-      </div>
-      <ion-text color="danger" *ngIf="errorMessage">
-        <p>{{ errorMessage }}</p>
-      </ion-text>
+        <button type="submit" expand="block">Registrar usuario</button>
+      </div>      
     </form>
   </div>
 </ion-content>

@@ -12,10 +12,8 @@ export class Tab1Page implements OnInit {
   
   juegos: Juego[] = []; 
   isLoading: boolean = true; 
-  
   // Variable para rastrear qué chip está seleccionado (usado para el color en HTML)
   filtroActivo: string = 'Todos';
-
   // Lista de chips: 'nombre' es para mostrar, 'slug' es para la API de RAWG
   categorias = [
     { nombre: 'Todos', slug: '' }, // Slug vacío para no filtrar
@@ -26,28 +24,23 @@ export class Tab1Page implements OnInit {
     { nombre: 'Estrategia', slug: 'strategy' },
     { nombre: 'Shooter', slug: 'shooter' }
   ];
-
   // Inyectamos el JuegosService
   constructor(private juegosService: JuegosService) {}
-
   // Se ejecuta una vez que el componente se inicializa
   ngOnInit() {
     // Carga inicial sin filtro
     this.cargarJuegos(); 
   }
-
   /**
    * Maneja el click en un chip de categoría.
    * Llama a cargarJuegos con el slug del filtro.
    */
   filtrarPorCategoria(slug: string, nombre: string) {
     // 1. Marca el chip como activo
-    this.filtroActivo = nombre; 
-    
+    this.filtroActivo = nombre;  
     // 2. Llama a la función de carga con el nuevo filtro
     this.cargarJuegos(slug);
   }
-
   /**
    * Carga los juegos, ahora con un parámetro opcional de género.
    * @param generoSlug El slug del género a filtrar. Por defecto es vacío ('').

@@ -4,17 +4,17 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { FavoritosPageRoutingModule } from './favoritos-routing.module';
+import { Tab5PageRoutingModule } from './tab5-routing.module';
 
-import { FavoritosPage } from './favoritos.page';
+import { Tab5Page } from './tab5.page';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    FavoritosPageRoutingModule
+    Tab5PageRoutingModule
   ],
-  declarations: [FavoritosPage]
+  declarations: [Tab5Page]
 })
-export class FavoritosPageModule {}
+export class Tab5PageModule {}

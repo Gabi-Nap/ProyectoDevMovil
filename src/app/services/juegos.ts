@@ -25,24 +25,24 @@ interface RespuestaApi {
 })
 
 export class JuegosService {
-  // ⚠️ TU CLAVE YA ESTÁ AQUÍ. ¡Perfecto!
+  // Clave api KEY
   private apiKey = `ebcf970455f4455e819b8800ef275506`;
   private apiUrl = `https://api.rawg.io/api/games?key=${this.apiKey}`;
+  
 
 
-  // Inyectamos el cliente HTTP
+  //INYECCION DEL CLIENTE
   constructor(private http: HttpClient) { }
   /**
    * Obtiene juegos populares, opcionalmente filtrados por género.
    * @param genero Nombre del género para filtrar (ej: 'action', 'adventure').
    */
-
+  
   getJuegosPopulares(genero?: string): Observable<RespuestaApi> {
     let url = `${this.apiUrl}&ordering=-rating&page_size=10`;
     if (genero) {
       url += `&genres=${genero.toLowerCase()}`;
     }
-    console.log('Llamando a la API de juegos:', url);
     return this.http.get<RespuestaApi>(url);
   }
   //ENCONTRAR JUEGO POR EL ID Y ATRAER SU CONTENIDO
@@ -57,6 +57,9 @@ export class JuegosService {
   obtenerImagenes(id: string){
     return this.http.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${this.apiKey}`);
     //ejemplo:  https://api.rawg.io/api/games/795632/screenshots?key=ebcf970455f4455e819b8800ef275506
+  }
+  getListaJuegos(): Observable<any> {
+    return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}`)
   }
 }
 

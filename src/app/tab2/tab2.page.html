@@ -1,66 +1,54 @@
-<ion-content [fullscreen]="true">
-  <!-- Barra de búsqueda -->
+<ion-content [fullscreen]="true" class="fondo-juegos">
+  <!-- 🔍 Barra de búsqueda -->
   <div class="barra-busqueda">
-    <!--input para escribir y buscar juegos en el buscador-->
-    <ion-searchbar [(ngModel)]="termino" placeholder="Buscar juegos..." class="edit-searchbar"
-      (ionInput)="buscarJuego()"></ion-searchbar>
-    <!-- Lista desplegada por cada letra que vamos colocando-->
-    <ion-list>
-      <ion-item [routerLink]="['/tabs/tab4',juego.id]" *ngFor="let juego of juegos">
+    <ion-searchbar
+      [(ngModel)]="termino"
+      placeholder="Buscar juegos..."
+      class="edit-searchbar"
+      (ionInput)="buscarJuego()">
+    </ion-searchbar>
+
+    <!-- Lista desplegable de resultados -->
+    <ion-list *ngIf="termino && juegos.length > 0" class="lista-busqueda">
+      <ion-item button [routerLink]="['/apps/juego', juego.id]" *ngFor="let juego of juegos" lines="none">
         <ion-thumbnail slot="start">
-          <img [src]="juego.background_image">
+          <img [src]="juego.background_image" alt="{{ juego.name }}" />
         </ion-thumbnail>
         <ion-label>
-          <h2>{{ juego.name }}</h2><!--Nombre del juego dentro de la lista-->
-          <p>Lanzamiento: {{ juego.released }}</p><!--fecha de lanzamiento del juego dentro de la lista-->
+          <h2>{{ juego.name }}</h2>
+          <p>Lanzamiento: {{ juego.released }}</p>
         </ion-label>
-      </ion-item>
-    </ion-list>    
-  </div>
-  <!-- Juegos sugeridos -->
-  <div class="sugerencia">
-    <h2>Juegos Sugeridos</h2>
-
-    <ion-list lines="none">
-      <ion-item class="sugerencia-juego">
-        <ion-avatar slot="start">
-          <img
-            src="https://imgs.search.brave.com/VIR1TtPzvtHIAndkdudJy-qzGPBna_TFEPnuDSQGvjs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA2LzMxLzIwLzM1/LzM2MF9GXzYzMTIw/MzUxNF9TUVpDNFF4/aTVVbnVvR1hLWTNW/aEZBVFRnWXJSYXd2/SC5qcGc"
-            alt="GTA V">
-        </ion-avatar>
-        <ion-label>
-          <h3>Grand Theft Auto V</h3>
-          <p>Acción - Aventura</p>
-        </ion-label>
-        <ion-badge color="primary" slot="end">4.5</ion-badge>
-      </ion-item>
-
-      <ion-item class="sugerencia-juego">
-        <ion-avatar slot="start">
-          <img
-            src="https://imgs.search.brave.com/VIR1TtPzvtHIAndkdudJy-qzGPBna_TFEPnuDSQGvjs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA2LzMxLzIwLzM1/LzM2MF9GXzYzMTIw/MzUxNF9TUVpDNFF4/aTVVbnVvR1hLWTNW/aEZBVFRnWXJSYXd2/SC5qcGc"
-            alt="Monster Hunter">
-        </ion-avatar>
-        <ion-label>
-          <h3>Monster Hunter: World</h3>
-          <p>RPG - Acción</p>
-        </ion-label>
-        <ion-badge color="primary" slot="end">4.3</ion-badge>
-      </ion-item>
-
-      <ion-item class="sugerencia-juego">
-        <ion-avatar slot="start">
-          <img
-            src="https://imgs.search.brave.com/VIR1TtPzvtHIAndkdudJy-qzGPBna_TFEPnuDSQGvjs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA2LzMxLzIwLzM1/LzM2MF9GXzYzMTIw/MzUxNF9TUVpDNFF4/aTVVbnVvR1hLWTNW/aEZBVFRnWXJSYXd2/SC5qcGc"
-            alt="Assassin's Creed">
-        </ion-avatar>
-        <ion-label>
-          <h3>Assassin's Creed Valhalla</h3>
-          <p>Aventura - RPG</p>
-        </ion-label>
-        <ion-badge color="primary" slot="end">4.2</ion-badge>
       </ion-item>
     </ion-list>
   </div>
 
+  <!-- 🎮 Lista de juegos exitosos -->
+  <div class="titulo-seccion">
+    <h1>🎯 Lista de juegos exitosos</h1>
+  </div>
+
+  <ion-grid *ngIf="listaJuegosExitosos.length > 0; else cargando">
+    <ion-row>
+      <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let juego of listaJuegosExitosos" [routerLink]="['/apps/juego', juego.id]">
+        <ion-card class="card-juego">
+          <div class="img-container">
+            <img [src]="juego.background_image" alt="{{ juego.name }}" />
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ juego.name }}</ion-card-title>
+            <ion-card-subtitle>Metacritic: {{ juego.metacritic || 'Sin datos' }}</ion-card-subtitle>
+            <ion-card-subtitle>Fecha: {{ juego.released }}</ion-card-subtitle>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- 🔄 Cargando -->
+  <ng-template #cargando>
+    <div class="cargando">
+      <ion-spinner name="crescent"></ion-spinner>
+      <p>Cargando juegos...</p>
+    </div>
+  </ng-template>
 </ion-content>

@@ -1,59 +1,95 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <div class="header flex justify-between items-center px-4">
+  <ion-toolbar color="dark">
+    <div class="header">
       <ion-title>Perfil</ion-title>
-      <ion-button (click)="cerrarSesion()" color="danger">CERRAR SESIÓN</ion-button>
+      <ion-button (click)="cerrarSesion()" color="danger">
+        <ion-icon slot="start" name="log-out-outline"></ion-icon>
+        Cerrar sesión
+      </ion-button>
     </div>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-  <ion-card>
+<ion-content class="fondo-perfil">
+  <ion-card class="perfil-card">
     <ion-card-header>
-      <ion-card-title>Usuario</ion-card-title>
-      <ion-card-subtitle>{{ datos.uid }}</ion-card-subtitle><!-- Id del usuario mostrado en la parte superior -->
+      <ion-card-title class="titulo-perfil">ID de usuario</ion-card-title>
+      <ion-card-subtitle style="font-size: 30px;" class="subtitulo">{{ datos.nombreUsuario }}</ion-card-subtitle>
     </ion-card-header>
 
-    <ion-card-content class="ion-text-center">
+    <ion-card-content>
+      <!-- Avatar -->
       <div class="avatar-container">
         <img [src]="fotoPerfil" alt="Foto de perfil" class="avatar" />
       </div>
 
       <input type="file" accept="image/*" #fileInput hidden (change)="subirFotoPerfil($event)" />
 
-      <ion-button expand="block" color="medium" (click)="fileInput.click()">
+      <!-- Botones principales -->
+      <ion-button expand="block" color="secondary" (click)="fileInput.click()" class="boton-accion">
+        <ion-icon slot="start" name="person-circle-outline"></ion-icon>
         Cambiar foto de perfil
       </ion-button>
 
-      <ion-button expand="block" color="primary" (click)="irAFavoritos()">
-        Ir a favoritos
+      <ion-button expand="block" color="warning" (click)="abrirCambioPassword()" class="boton-accion">
+        <ion-icon slot="start" name="key-outline"></ion-icon>
+        Cambiar contraseña
       </ion-button>
+
+      <ion-button id="present-alert" color="danger" expand="block" class="boton-accion">
+        <ion-icon slot="start" name="warning-outline"></ion-icon>
+        Eliminar cuenta
+      </ion-button>
+
+      <!-- Alerta de confirmación -->
+      <ion-alert
+        trigger="present-alert"
+        header="Eliminar cuenta"
+        subHeader="Confirmación de seguridad"
+        message="¿Estás seguro? Esta acción es permanente. Escribe tu contraseña para confirmar que eres el propietario de la cuenta."
+        [inputs]="alertInputs"
+        [buttons]="alertButtons">
+      </ion-alert>
     </ion-card-content>
   </ion-card>
 
-  <ion-item>
-    <ion-label>
-      <h2>Email</h2>
-      <p>{{ datos.email }}</p>
-    </ion-label>
-  </ion-item>
+  <!-- Datos del usuario -->
+  <div class="datos-container">
+    <ion-item lines="full">
+      <ion-label>
+        <h2>Nombre completo</h2>
+        <p>{{ datos.nombreCompleto }}</p>
+      </ion-label>
+      <ion-button fill="clear" size="small" (click)="editarCampo('nombreCompleto', datos.nombreCompleto)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
 
-  <ion-item>
-    <ion-label>
-      <h2>UID</h2>
-      <p>{{ datos.uid }}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <h2>Nombre</h2>
-      <p>{{ datos.nombre }}</p>
-    </ion-label>
-  </ion-item>
-  <ion-item>
-    <ion-label>
-      <h2>Sexo</h2>
-      <p>{{ datos.sexo }}</p>
-    </ion-label>
-  </ion-item>
+    <ion-item lines="full">
+      <ion-label>
+        <h2>Nombre de usuario</h2>
+        <p>{{ datos.nombreUsuario }}</p>
+      </ion-label>
+      <ion-button fill="clear" size="small" (click)="editarCampo('nombreUsuario', datos.nombreUsuario)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label>
+        <h2>Nacionalidad</h2>
+        <p>{{ datos.nacionalidad }}</p>
+      </ion-label>
+      <ion-button fill="clear" size="small" (click)="editarCampo('nacionalidad', datos.nacionalidad)">
+        <ion-icon slot="icon-only" name="create-outline"></ion-icon>
+      </ion-button>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>
+        <h2>Email</h2>
+        <p>{{ datos.email }}</p>
+      </ion-label>
+    </ion-item>
+  </div>
 </ion-content>
