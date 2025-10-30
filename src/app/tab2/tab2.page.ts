@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { JuegosService } from '../services/juegos'
-import { Router } from '@angular/router'
+import { JuegosService } from '../services/juegos';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -9,13 +9,20 @@ import { Router } from '@angular/router'
   standalone: false,
 })
 export class Tab2Page {
-
-  constructor(private proveedorService: JuegosService, public router: Router) { }
+  constructor(private proveedorService: JuegosService, public router: Router) {}
 
   termino: string = '';
   juegos: any[] = [];
-  // Esta funcion va a servir para que el buscador reaccione
-  // a nuestra busqueda mostrandonos una lista de items
+
+  /**
+   * @function buscarJuego
+   * @description
+   * Realiza una búsqueda de juegos según el término ingresado por el usuario.
+   * Si el campo de búsqueda está vacío, limpia los resultados.
+   * De lo contrario, llama al servicio `JuegosService` y actualiza la lista de juegos encontrados.
+   * @returns {void}
+   */
+
   buscarJuego() {
     if (this.termino.trim() === '') {
       this.juegos = [];

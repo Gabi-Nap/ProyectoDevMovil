@@ -12,7 +12,7 @@ export interface Juego {
   description?: string;
 }
 
-// Interfaz para la respuesta de la API.
+
 interface RespuestaApi {
   results: Juego[];
   count: number;
@@ -25,17 +25,14 @@ interface RespuestaApi {
 })
 
 export class JuegosService {
-  // ⚠️ TU CLAVE YA ESTÁ AQUÍ. ¡Perfecto!
+  
   private apiKey = `ebcf970455f4455e819b8800ef275506`;
   private apiUrl = `https://api.rawg.io/api/games?key=${this.apiKey}`;
 
 
-  // Inyectamos el cliente HTTP
+ 
   constructor(private http: HttpClient) { }
-  /**
-   * Obtiene juegos populares, opcionalmente filtrados por género.
-   * @param genero Nombre del género para filtrar (ej: 'action', 'adventure').
-   */
+  
 
   getJuegosPopulares(genero?: string): Observable<RespuestaApi> {
     let url = `${this.apiUrl}&ordering=-rating&page_size=10`;
@@ -45,15 +42,21 @@ export class JuegosService {
     console.log('Llamando a la API de juegos:', url);
     return this.http.get<RespuestaApi>(url);
   }
-  //ENCONTRAR JUEGO POR EL ID Y ATRAER SU CONTENIDO
+  
+
+
   getJuegoPorId(id: string) {
     return this.http.get(`https://api.rawg.io/api/games/${id}?key=${this.apiKey}`);
   }
-  //FUNCION PARA BUSCAR UN JUEGO POR EL INPUT CON EL APIKEY
+  
+
+
   buscarJuegos(nombre: string) {
     return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}&search=${nombre}`);
   }
-  //ESTO ES PARA OBTENER LISTA DE IMAGENES SCREENSHOOT SOBRE EL JUEGO QUE APRETEMOS
+ 
+
+  
   obtenerImagenes(id: string){
     return this.http.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${this.apiKey}`);
     //ejemplo:  https://api.rawg.io/api/games/795632/screenshots?key=ebcf970455f4455e819b8800ef275506
