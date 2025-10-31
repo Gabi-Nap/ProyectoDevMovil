@@ -19,7 +19,7 @@ const routes: Routes = [
         path: 'perfil',
         loadChildren: () => import('../tab3/tab3.module').then(m => m.Tab3PageModule)
       },
-      {//Esto de aca redirigira a un tab donde se va a agarrar el id
+      {
         path: 'juego/:id',
         loadChildren: () => import('../tab4/tab4.module').then(m => m.Tab4PageModule)
       },

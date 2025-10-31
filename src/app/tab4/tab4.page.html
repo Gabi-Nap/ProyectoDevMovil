@@ -1,6 +1,8 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Presentación de juego</ion-title>
+  <ion-toolbar style="padding: 20px 0 20px 0;">
+    <div class="header flex justify-between items-center px-4">
+      <ion-title>GamePage</ion-title>
+    </div>
   </ion-toolbar>
 </ion-header>
 
@@ -8,12 +10,9 @@
   <ion-card>
     <img [src]="juego.background_image">
     <ion-card-header>
-      <!-- -------------------------titulos y subtitulos de los juegos de la api--------------------- -->
-      <ion-card-title class="espacio">{{ juego.name }}</ion-card-title><!--Nombre del juego-->
-      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name }}</ion-card-subtitle><!--nombre del desarrollador-->
-      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released }}</ion-card-subtitle><!--dato fecha de lanzamiento-->
-      <!-- ----------------------------- ------------------------------------------------->
-      <!-------------------------------------Boton para añadir a favoritos------------------>
+      <ion-card-title class="espacio">{{ juego.name }}</ion-card-title>
+      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers[0].name }}</ion-card-subtitle>
+      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released }}</ion-card-subtitle>
       <ion-button [color]="esFavoritoActual ? 'danger' : 'warning'" [disabled]="cargandoFavorito"
         (click)="toggleFavorito()" size="small">
         <ion-icon slot="start" [name]="esFavoritoActual ? 'trash-outline' : 'star'"></ion-icon>
@@ -25,20 +24,16 @@
         </ng-template>
       </ion-button>
     </ion-card-header>
-    <!-- ------------------------------------------------------------------------>
-    <!--Aca ira la descripcion del juego, el modo acordeon que se habre deslizando para abajo-->
     <ion-accordion-group>
       <ion-accordion toggleIcon="caret-down-circle" toggleIconSlot="start">
         <ion-item slot="header" color="light">
           <ion-label>Abrir descripción</ion-label>
         </ion-item>
         <div class="ion-padding" slot="content">
-          <p class="tituloImagenes"  [innerHTML]="juego.description">{{ juego.description }}</p>
+          <p class="tituloImagenes" [innerHTML]="juego.description">{{ juego.description }}</p>
         </div>
       </ion-accordion>
     </ion-accordion-group>
-    <!-- ----------------------------------------------------------------------- -->
-    <!------------------------------------Conjunto de imagenes del videojuego para presentar------------------------------->
     <h2>Imagenes de {{ juego?.name }}</h2>
     <p class="tituloImagenes">(Deslizar hacia derecha)</p>
     <div class="scroll-container" *ngIf="listaJuegos.length > 0; else sinImagenes">
@@ -49,14 +44,10 @@
     <ng-template #sinImagenes>
       <p class="error-text"> Este juego no tiene imágenes disponibles</p>
     </ng-template>
-    <!-- ---------------------------------seccion de comentarios del videojuego con formulario ---------------------------->
     <div class="comentario-form">
-      <!-- textarea para poder escribir un comentario -->
-      <ion-textarea class="textarea" [(ngModel)]="comentario" placeholder="Deja tu comentario sobre este videojuego..." rows="4"
-        autoGrow="true">
+      <ion-textarea class="textarea" [(ngModel)]="comentario" placeholder="Deja tu comentario sobre este videojuego..."
+        rows="4" autoGrow="true">
       </ion-textarea>
-      <!-- ------------------------------ -------------------------------------------------------------->
-      <!----------------------------------------Esto es para el boton de "subir imagen"---------------------------------->
       <div class="upload-section">
         <input type="file" (change)="seleccionarImagen($event)" accept="image/*" hidden #fileInput>
         <ion-button fill="outline" color="light" (click)="fileInput.click()">
@@ -64,27 +55,20 @@
         </ion-button>
         <span *ngIf="imagenSeleccionada">{{ imagenSeleccionada.name }}</span>
       </div>
-      <!-- ----------------------------------------------------------------------------------- -->
-      <!-- codigo de boton para publicar en el sitio web sea foto con comentario, solo foto o solo comentario -->
       <ion-button expand="block" color="primary" (click)="enviarComentario()" [disabled]="cargando">
         {{ cargando ? 'Enviando...' : 'Publicar' }}
       </ion-button>
     </div>
   </ion-card>
-  <!-- ------------------------------------------- ----------------------------------------------------->
-  <!-- Aca ira la seccion de comentarios que traeremos de firestore y storage mediante un ngFor al array donde los almacenamos-->
   <ion-card>
     <ion-card-title>SECCION DE COMENTARIOS</ion-card-title>
     <ion-list class="comentarios-lista">
       <ion-item *ngFor="let coment of comentarios" lines="none" class="comentario-item">
         <ion-label>
           <h3 style="color: red;" class="nombre-usuario">{{ coment.nombreUsuario }}</h3>
-          <!--nombre del usuario que comentara(autenticado) -->
-          <p class="comentario-texto">{{ coment.comentario }}</p> <!--Comentario de usuario-->
-          <img *ngIf="coment.imageUrl" [src]="coment.imageUrl" class="comentario-img"
-            alt="comentario" /><!--imagen que publico el comentador-->
+          <p class="comentario-texto">{{ coment.comentario }}</p>
+          <img *ngIf="coment.imageUrl" [src]="coment.imageUrl" class="comentario-img" alt="comentario" />
           <p class="comentario-fecha">{{ coment.fecha?.toDate() | date:'short' }}</p>
-          <!--datos de fecha y hora de publicación-->
         </ion-label>
       </ion-item>
     </ion-list>

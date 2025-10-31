@@ -102,13 +102,9 @@ width: 100%;
   
   .genero {
     width: 100%;
-    //padding: 0px 40px 15px 0;
     border: none;
-    background: transparent;
-    //font-size: 16px;
+    background: transparent;    
     appearance: none;
-    //-webkit-appearance: none;
-    //-moz-appearance: none;
     outline: none;
   }
   
@@ -118,7 +114,7 @@ width: 100%;
     top: 50%;
     transform: translateY(-50%);
     color: #666;
-    //pointer-events: none;
+    
   }
 }
   

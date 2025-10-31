@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 
-// Interfaz para estructurar los datos del juego (Nombres de las propiedades coinciden con la API de RAWG)
 export interface Juego {
   id: any;
   name: string;
@@ -11,33 +10,24 @@ export interface Juego {
   released: string;
   description?: string;
 }
-
-// Interfaz para la respuesta de la API.
 interface RespuestaApi {
   results: Juego[];
   count: number;
   next: string | null;
 }
-
-
 @Injectable({
   providedIn: 'root'
 })
-
 export class JuegosService {
-  // Clave api KEY
   private apiKey = `ebcf970455f4455e819b8800ef275506`;
   private apiUrl = `https://api.rawg.io/api/games?key=${this.apiKey}`;
-  
-
-
-  //INYECCION DEL CLIENTE
   constructor(private http: HttpClient) { }
-  /**
-   * Obtiene juegos populares, opcionalmente filtrados por género.
-   * @param genero Nombre del género para filtrar (ej: 'action', 'adventure').
-   */
-  
+   /**
+  @function getJuegosPopulares
+  @description Se encarga de traer juegos de la api
+  @param genero tipo string
+  @returns retorna un observable
+ */
   getJuegosPopulares(genero?: string): Observable<RespuestaApi> {
     let url = `${this.apiUrl}&ordering=-rating&page_size=10`;
     if (genero) {
@@ -45,19 +35,43 @@ export class JuegosService {
     }
     return this.http.get<RespuestaApi>(url);
   }
-  //ENCONTRAR JUEGO POR EL ID Y ATRAER SU CONTENIDO
+
+  /**
+  @function getJuegoPorId
+  @description recibe datos de un juego especifico de la api
+  @param id tipo string
+  @returns retorna un observable
+ */
   getJuegoPorId(id: string) {
     return this.http.get(`https://api.rawg.io/api/games/${id}?key=${this.apiKey}`);
   }
-  //FUNCION PARA BUSCAR UN JUEGO POR EL INPUT CON EL APIKEY
+
+  /**
+  @function buscarJuegos
+  @description funcion desplegable de juegos mediante un input en el buscador
+  @param nombre tipo string
+  @returns retorna un observable
+ */
   buscarJuegos(nombre: string) {
     return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}&search=${nombre}`);
   }
-  //ESTO ES PARA OBTENER LISTA DE IMAGENES SCREENSHOOT SOBRE EL JUEGO QUE APRETEMOS
+
+  /**
+  @function obtenerImagenes
+  @description recibe una lista de imagenes de un juego en especifico
+  @param id tipo strinig
+  @returns retorna un observable
+ */
   obtenerImagenes(id: string){
     return this.http.get(`https://api.rawg.io/api/games/${id}/screenshots?key=${this.apiKey}`);
-    //ejemplo:  https://api.rawg.io/api/games/795632/screenshots?key=ebcf970455f4455e819b8800ef275506
   }
+  
+  /**
+  @function getListaJuegos
+  @description reciibe una lista de juegos principales de la api
+  @param 
+  @returns retorna un observable
+ */
   getListaJuegos(): Observable<any> {
     return this.http.get(`https://api.rawg.io/api/games?key=${this.apiKey}`)
   }

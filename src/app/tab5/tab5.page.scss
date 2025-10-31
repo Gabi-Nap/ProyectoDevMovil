@@ -3,7 +3,10 @@
   padding: 16px;
   color: #fff;
 }
-
+.titulo{
+  margin: 45px 0 30px 0;
+  color: #ffc107;
+}
 .sin-favoritos {
   text-align: center;
   margin-top: 25vh;
@@ -57,7 +60,6 @@
   }
 }
 
-// Diseño para los botones
 .contenedor-botones {
   display: flex;
   justify-content: center;

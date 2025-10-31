@@ -4,8 +4,8 @@
   padding: 0 12px 50px;
 }
 
-/* 🔍 Barra de búsqueda */
 .barra-busqueda {
+  margin-top: 15px;
   padding: 18px 10px 8px;
   display: flex;
   flex-direction: column;
@@ -62,7 +62,6 @@
   }
 }
 
-// Titulo de la seccion
 .titulo-seccion {
   text-align: center;
   margin-top: 10px;
@@ -75,7 +74,6 @@
   }
 }
 
-// Tarjeta de los juegos
 .card-juego {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 14px;
@@ -117,7 +115,6 @@
   }
 }
 
-// Estado de carga
 .cargando {
   text-align: center;
   margin-top: 40px;

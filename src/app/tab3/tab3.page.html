@@ -1,5 +1,5 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="dark">
+  <ion-toolbar color="dark"  class="contenido-top">
     <div class="header">
       <ion-title>Perfil</ion-title>
       <ion-button (click)="cerrarSesion()" color="danger">
@@ -9,51 +9,31 @@
     </div>
   </ion-toolbar>
 </ion-header>
-
 <ion-content class="fondo-perfil">
   <ion-card class="perfil-card">
     <ion-card-header>
       <ion-card-title class="titulo-perfil">ID de usuario</ion-card-title>
       <ion-card-subtitle style="font-size: 30px;" class="subtitulo">{{ datos.nombreUsuario }}</ion-card-subtitle>
     </ion-card-header>
-
-    <ion-card-content>
-      <!-- Avatar -->
+    <ion-card-content>      
       <div class="avatar-container">
         <img [src]="fotoPerfil" alt="Foto de perfil" class="avatar" />
       </div>
-
       <input type="file" accept="image/*" #fileInput hidden (change)="subirFotoPerfil($event)" />
-
-      <!-- Botones principales -->
       <ion-button expand="block" color="secondary" (click)="fileInput.click()" class="boton-accion">
         <ion-icon slot="start" name="person-circle-outline"></ion-icon>
         Cambiar foto de perfil
       </ion-button>
-
       <ion-button expand="block" color="warning" (click)="abrirCambioPassword()" class="boton-accion">
         <ion-icon slot="start" name="key-outline"></ion-icon>
         Cambiar contraseña
       </ion-button>
-
-      <ion-button id="present-alert" color="danger" expand="block" class="boton-accion">
+      <ion-button (click)="abrirAlertaEliminarCuenta()" color="danger" expand="block" class="boton-accion">
         <ion-icon slot="start" name="warning-outline"></ion-icon>
         Eliminar cuenta
       </ion-button>
-
-      <!-- Alerta de confirmación -->
-      <ion-alert
-        trigger="present-alert"
-        header="Eliminar cuenta"
-        subHeader="Confirmación de seguridad"
-        message="¿Estás seguro? Esta acción es permanente. Escribe tu contraseña para confirmar que eres el propietario de la cuenta."
-        [inputs]="alertInputs"
-        [buttons]="alertButtons">
-      </ion-alert>
     </ion-card-content>
   </ion-card>
-
-  <!-- Datos del usuario -->
   <div class="datos-container">
     <ion-item lines="full">
       <ion-label>
@@ -64,7 +44,6 @@
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-item>
-
     <ion-item lines="full">
       <ion-label>
         <h2>Nombre de usuario</h2>
@@ -74,7 +53,6 @@
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-item>
-
     <ion-item lines="full">
       <ion-label>
         <h2>Nacionalidad</h2>
@@ -84,7 +62,6 @@
         <ion-icon slot="icon-only" name="create-outline"></ion-icon>
       </ion-button>
     </ion-item>
-
     <ion-item lines="none">
       <ion-label>
         <h2>Email</h2>

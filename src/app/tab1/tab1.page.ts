@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { JuegosService } from '../services/juegos'; 
-import { Juego } from '../services/juegos'; 
+import { JuegosService } from '../services/juegos';
+import { Juego } from '../services/juegos';
 
 @Component({
   selector: 'app-tab1',
@@ -9,14 +9,12 @@ import { Juego } from '../services/juegos';
   standalone: false,
 })
 export class Tab1Page implements OnInit {
-  
-  juegos: Juego[] = []; 
-  isLoading: boolean = true; 
-  // Variable para rastrear qué chip está seleccionado (usado para el color en HTML)
+
+  juegos: Juego[] = [];
+  isLoading: boolean = true;
   filtroActivo: string = 'Todos';
-  // Lista de chips: 'nombre' es para mostrar, 'slug' es para la API de RAWG
   categorias = [
-    { nombre: 'Todos', slug: '' }, // Slug vacío para no filtrar
+    { nombre: 'Todos', slug: '' },
     { nombre: 'Acción', slug: 'action' },
     { nombre: 'Aventura', slug: 'adventure' },
     { nombre: 'RPG', slug: 'role-playing-games' },
@@ -24,43 +22,41 @@ export class Tab1Page implements OnInit {
     { nombre: 'Estrategia', slug: 'strategy' },
     { nombre: 'Shooter', slug: 'shooter' }
   ];
-  // Inyectamos el JuegosService
-  constructor(private juegosService: JuegosService) {}
-  // Se ejecuta una vez que el componente se inicializa
+  constructor(private juegosService: JuegosService) { }
   ngOnInit() {
-    // Carga inicial sin filtro
-    this.cargarJuegos(); 
+    this.cargarJuegos();
   }
+
   /**
-   * Maneja el click en un chip de categoría.
-   * Llama a cargarJuegos con el slug del filtro.
-   */
+  @function filtrarPorCategoria
+  @description filtra por lista de categorias el llamado de juegos de la api
+  @param slug tipo string
+  @param nombre tipo string
+  @returns 
+ */
   filtrarPorCategoria(slug: string, nombre: string) {
-    // 1. Marca el chip como activo
-    this.filtroActivo = nombre;  
-    // 2. Llama a la función de carga con el nuevo filtro
+    this.filtroActivo = nombre;
     this.cargarJuegos(slug);
   }
+  
   /**
-   * Carga los juegos, ahora con un parámetro opcional de género.
-   * @param generoSlug El slug del género a filtrar. Por defecto es vacío ('').
-   */
-  cargarJuegos(generoSlug: string = ''){
+  @function cargarJuegos
+  @description carga los juegos desde la api
+  @param generoSlug tipo string
+  @returns 
+ */
+  cargarJuegos(generoSlug: string = '') {
     this.isLoading = true;
-    
-    // Pasamos el slug de género al servicio
     this.juegosService.getJuegosPopulares(generoSlug).subscribe({
       next: (Response) => {
-        this.juegos = Response.results;
-        console.log(`Juegos cargados para ${generoSlug || 'Todos'}:`, this.juegos.length);
+        this.juegos = Response.results;        
       },
-      error: (err) => {
-        console.error("Error al cargar los juegos desde la API:", err);
-        this.juegos = []; // Vaciar la lista si hay error
-        this.isLoading = false; 
+      error: (err) => {        
+        this.juegos = [];
+        this.isLoading = false;
       },
       complete: () => {
-        this.isLoading = false; 
+        this.isLoading = false;
       }
     });
   }

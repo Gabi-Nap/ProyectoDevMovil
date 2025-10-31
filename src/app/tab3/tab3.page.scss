@@ -3,12 +3,15 @@
   color: #fff;
   padding: 16px;
 }
-
+.contenido-top{
+  padding: 10px 0 10px;
+}
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 10px;
+  margin-top: 25px;
 }
 
 ion-title {
@@ -42,6 +45,7 @@ ion-title {
   justify-content: center;
   margin: 15px 0;
 }
+
 
 .avatar {
   width: 110px;

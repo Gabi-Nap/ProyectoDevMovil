@@ -1,5 +1,4 @@
 <ion-content [fullscreen]="true" class="fondo-juegos">
-  <!-- 🔍 Barra de búsqueda -->
   <div class="barra-busqueda">
     <ion-searchbar
       [(ngModel)]="termino"
@@ -7,8 +6,6 @@
       class="edit-searchbar"
       (ionInput)="buscarJuego()">
     </ion-searchbar>
-
-    <!-- Lista desplegable de resultados -->
     <ion-list *ngIf="termino && juegos.length > 0" class="lista-busqueda">
       <ion-item button [routerLink]="['/apps/juego', juego.id]" *ngFor="let juego of juegos" lines="none">
         <ion-thumbnail slot="start">
@@ -21,12 +18,9 @@
       </ion-item>
     </ion-list>
   </div>
-
-  <!-- 🎮 Lista de juegos exitosos -->
   <div class="titulo-seccion">
     <h1>🎯 Lista de juegos exitosos</h1>
   </div>
-
   <ion-grid *ngIf="listaJuegosExitosos.length > 0; else cargando">
     <ion-row>
       <ion-col size="12" sizeMd="6" sizeLg="4" *ngFor="let juego of listaJuegosExitosos" [routerLink]="['/apps/juego', juego.id]">
@@ -43,8 +37,6 @@
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <!-- 🔄 Cargando -->
   <ng-template #cargando>
     <div class="cargando">
       <ion-spinner name="crescent"></ion-spinner>
