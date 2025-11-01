@@ -4,7 +4,7 @@ import { doc, setDoc, getDoc, updateDoc, arrayUnion, arrayRemove, addDoc, collec
 import { getStorage, ref, uploadBytes, getDownloadURL } from '@angular/fire/storage';
 import { Firestore } from '@angular/fire/firestore';
 import { ToastController } from '@ionic/angular';
-import { getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
+import { deleteDoc, getDocs, onSnapshot, orderBy, query } from 'firebase/firestore';
 
 @Injectable({
   providedIn: 'root'
@@ -55,38 +55,70 @@ export class AuthService {
     return data['juegos'] || []; //retorna la informacion que tenga de lista con juegos o vacio
   }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // -----------------------------Funcionalidad para boton favoritos---------------------------------------------------------------------------
   //Esta funcion boton servira para agregar a favoritos
-  async agregarFavoritos(idDelJuego: string, nombreJuego: string,backgroundImage: string): Promise<void>
-  {
-    const user :any= this.auth.currentUser;
-    ////lo que hace el doc es apuntar a nuestra base de datos, que dato vamos a manejar, osea genera la direccion para luego poder usarla
-    const refUsuario = doc(this.firestore, "favoritos", user.uid);
-    try { //el updateDoc sirve para actualizar solo algunos campos específicos de un documento existente, sin borrar los demás
-      await updateDoc(refUsuario, {
-        //Aca del juego seleccionado, agarramos su id y su nombre para luego guardarlos en la base de datos
-        juegos: arrayUnion({ id: idDelJuego, nombre: nombreJuego,background_image: backgroundImage }),
-      });
-    } catch (err) {
-      // si el doc no existe todavía, lo creamos con ese primer juego
-      await setDoc(refUsuario, {
-        juegos: [{ id: idDelJuego, nombre: nombreJuego,background_image: backgroundImage }],
-      });
-    }
+  async agregarFavoritos(idDelJuego: string | number, nombreJuego: string, backgroundImage: string): Promise<void> {
+  const user: any = this.auth.currentUser;
+  if (!user) {
+    console.error('⚠️ No hay usuario logueado.');
+    return;
   }
+
+  const refUsuario = doc(this.firestore, "favoritos", user.uid, "juegos", String(idDelJuego));
+
+  await setDoc(refUsuario, {
+    id: idDelJuego,
+    nombre: nombreJuego,
+    background_image: backgroundImage
+  });
+}
   // ---------------------------------------------------------------------------------------------------
   // ---------------------------------Funcion para quitar de favoritos------------------------------------------
-  async quitarDeFavoritos(idJuego: string, nombreJuego: string, backgroundImage: string): Promise<void> 
-  {
-    const user :any= this.auth.currentUser;//------------->>>>>>>>>>>
-
-    const refUsuario = doc(this.firestore, 'favoritos', user.uid);
-    // IMPORTANTE:
-    // arrayRemove necesita el objeto EXACTO que está guardado
-    await updateDoc(refUsuario, {
-      juegos: arrayRemove({ id: idJuego, nombre: nombreJuego, background_image: backgroundImage }),
-    });
+  async quitarDeFavoritos(idDelJuego: string | number): Promise<void> {
+  const user: any = this.auth.currentUser;
+  if (!user) {
+    console.error('⚠️ No hay usuario logueado.');
+    return;
   }
+
+  const refUsuario = doc(this.firestore, "favoritos", user.uid, "juegos", String(idDelJuego));
+  await deleteDoc(refUsuario);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   // ---------------------------------------------------------------------------------------------
   //Es para saber si es de los favoritos, sera llamado en el tab4 dentro del ngOnInit para llamar a los favoritos
   async esFavorito(idJuego: string): Promise<boolean> 
@@ -109,7 +141,7 @@ export class AuthService {
     if (userSnap.exists()) {//si el uid del usuario existe....
       //guarda la data en la vaiable userData
       const userData = userSnap.data();
-      nombreUsuario = userData['nombre'] || nombreUsuario;//se agrega el nombre guardado en el firestore en la variable nombreUsuario para luego utilizarla en quien publico el comentario
+      nombreUsuario = userData['nombreUsuario'] || nombreUsuario;//se agrega el nombre guardado en el firestore en la variable nombreUsuario para luego utilizarla en quien publico el comentario
     }
     let imageUrl = '';//variable que contiene la url de imagen
     if (imagen) {//si ya tenemos una imagen seleccionada en el comentario 

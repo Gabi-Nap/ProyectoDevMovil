@@ -15,6 +15,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 // -----------------------------
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { CommonModule } from '@angular/common';
     provideFirebaseApp(() => initializeApp(environment.firebaseConfig)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()), // 👈 AQUÍ IMPORTÁS STORAGE
   ],
   bootstrap: [AppComponent],
 })
