@@ -1,0 +1,52 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="padding: 20px 0;">
+    <div class="header">
+      <ion-title>GamePage</ion-title>
+      <ion-avatar>
+        <img [src]="fotoPerfil" alt="Foto de perfil">
+      </ion-avatar>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <div class="bienvenida text-center p-6 bg-primary-lighter">
+    <h1 class="text-2xl font-bold text-gray-800">¡Bienvenido a GamePage!</h1>
+    <p class="text-sm text-gray-600">Descubre Post's de Videojuegos</p>
+  </div>
+  <div class="categorias p-4 mt-6">
+    <h2 class="text-xl font-bold mb-3">Categorías Populares</h2>
+    <div class="lista-categorias flex flex-wrap gap-2">
+      <ion-chip 
+        *ngFor="let cat of categorias"
+        (click)="filtrarPorCategoria(cat.slug, cat.nombre)"
+        [color]="filtroActivo === cat.nombre ? 'primary' : 'light'"
+        class="cursor-pointer">
+        {{ cat.nombre }}
+      </ion-chip>    
+    </div>
+  </div>
+  <div *ngIf="isLoading" class="flex justify-center items-center h-48">
+    <ion-spinner name="crescent" color="primary"></ion-spinner>
+    <p class="ml-3 text-primary">Cargando juegos populares...</p>
+  </div>
+  <div *ngIf="!isLoading && juegos.length === 0" class="text-center p-8 text-gray-500">
+    <p>No se pudieron cargar los juegos o la lista está vacía.</p>
+  </div>
+  <div *ngIf="!isLoading && juegos.length > 0"
+    class="juegos-grid p-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <ion-card *ngFor="let juego of juegos" class="juegos-card shadow-lg rounded-lg overflow-hidden"
+      [routerLink]="['/apps/juego',juego.id]">      
+      <img [src]="juego.background_image" [alt]="'Imagen de fondo de ' + juego.name" class="w-full h-48 object-cover" />
+      <ion-card-header>        
+        <ion-card-title class="text-lg font-semibold">{{ juego.name }}</ion-card-title>
+        <ion-card-subtitle class="text-sm text-yellow-500">
+          ⭐ {{ juego.rating | number:'1.1-1' }}/5
+          <span class="text-xs text-gray-500 ml-2">({{ juego.released }})</span>
+        </ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content class="text-sm text-gray-600">        
+        <p>¡Descubre más sobre este título de {{ juego.released }}! Puntuación de la comunidad.</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

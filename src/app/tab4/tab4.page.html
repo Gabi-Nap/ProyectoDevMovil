@@ -1,0 +1,74 @@
+<ion-header [translucent]="true">
+  <ion-toolbar style="padding: 20px 0 20px 0;">
+    <div class="header flex justify-between items-center px-4">
+      <ion-title>GamePage</ion-title>
+    </div>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="comentarios-container" *ngIf="juego">
+  <ion-card>
+    <img [src]="juego.background_image">
+    <ion-card-header>
+      <ion-card-title class="espacio">{{ juego.name }}</ion-card-title>
+      <ion-card-subtitle class="espacio">Desarrollador: {{ juego.developers?.[0]?.name || 'sin información' }}</ion-card-subtitle>
+      <ion-card-subtitle class="espacio">Fecha de lanzamiento: {{ juego.released || 'sin información' }}</ion-card-subtitle>
+      <ion-button [color]="esFavoritoActual ? 'danger' : 'warning'"
+        (click)="toggleFavorito()" size="small">        
+        <ng-container *ngIf="!esFavoritoActual; else yaEsFav">
+          Añadir a favoritos
+        </ng-container>
+        <ng-template #yaEsFav>
+          Eliminar de favoritos
+        </ng-template>
+      </ion-button>
+    </ion-card-header>
+    <ion-accordion-group>
+      <ion-accordion toggleIcon="caret-down-circle" toggleIconSlot="start">
+        <ion-item slot="header" color="light">
+          <ion-label>Abrir descripción</ion-label>
+        </ion-item>
+        <div class="ion-padding" slot="content">
+          <p class="tituloImagenes" [innerHTML]="juego.description">{{ juego.description }}</p>
+        </div>
+      </ion-accordion>
+    </ion-accordion-group>
+    <h2>Imagenes de {{ juego?.name }}</h2>
+    <p class="tituloImagenes">(Deslizar hacia derecha)</p>
+    <div class="scroll-container" *ngIf="listaJuegos.length > 0; else sinImagenes">
+      <div class="item" *ngFor="let img of listaJuegos">
+        <img [src]="img.image" />
+      </div>
+    </div>
+    <ng-template #sinImagenes>
+      <p class="error-text"> Este juego no tiene imágenes disponibles</p>
+    </ng-template>
+    <div class="comentario-form">
+      <ion-textarea class="textarea" [(ngModel)]="comentario" placeholder="Deja tu comentario sobre este videojuego..."
+        rows="4" autoGrow="true">
+      </ion-textarea>
+      <div class="upload-section">
+        <input type="file" (change)="seleccionarImagen($event)" accept="image/*" hidden #fileInput>
+        <ion-button fill="outline" color="light" (click)="fileInput.click()">
+          Subir imagen
+        </ion-button>
+        <span *ngIf="imagenSeleccionada">{{ imagenSeleccionada.name }}</span>
+      </div>
+      <ion-button expand="block" color="primary" (click)="enviarComentario()" [disabled]="cargando">
+        {{ cargando ? 'Enviando...' : 'Publicar' }}
+      </ion-button>
+    </div>
+  </ion-card>
+  <ion-card>
+    <ion-card-title>SECCION DE COMENTARIOS</ion-card-title>
+    <ion-list class="comentarios-lista">
+      <ion-item *ngFor="let coment of comentarios" lines="none" class="comentario-item">
+        <ion-label>
+          <h3 style="color: red;" class="nombre-usuario">{{ coment.nombreUsuario }}</h3>
+          <p class="comentario-texto">{{ coment.comentario }}</p>
+          <img *ngIf="coment.imageUrl" [src]="coment.imageUrl" class="comentario-img" alt="comentario" />
+          <p class="comentario-fecha">{{ coment.fecha?.toDate() | date:'short' }}</p>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

@@ -1,0 +1,19 @@
+<ion-content [fullscreen]="true">
+  <div class="contenedor">
+    <form class="formulario" (ngSubmit)="login()">
+      <h1>Iniciar sesión</h1>
+      <ion-item class="items">
+        <ion-icon name="mail-outline" class="iconos"></ion-icon>
+        <ion-input [(ngModel)]="email" name="email" type="email" required placeholder="Ingrese su mail"></ion-input>
+      </ion-item>
+      <ion-item class="items">
+        <ion-icon name="lock-closed-outline" class="iconos"></ion-icon>
+        <ion-input [(ngModel)]="password" name="password" type="password" required
+          placeholder="Ingrese su contraseña"></ion-input>
+      </ion-item>
+      <button type="submit" class="botones">Ingresar</button>
+      <p style="color: black; text-align: center;">¿No tienes una cuenta?</p>
+      <button routerLink="/register" class="botones">Regístrarse</button>
+    </form>
+  </div>
+</ion-content>
